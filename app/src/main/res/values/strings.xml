@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">KotlinSample</string>
+
+    <string name="chartFill">将柱状改填满</string>
+    <string name="chartEmpty">将柱状图改为空</string>
+    <string name="chartAllFill">将所有的圆柱体填满</string>
+
+</resources>
