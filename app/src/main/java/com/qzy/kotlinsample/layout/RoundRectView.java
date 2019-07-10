@@ -53,7 +53,7 @@ public class RoundRectView extends View {
     }
 
     private int translateViewSize(int defaultSize,int measureSpec){
-        int mySize = DEFAULT_WIDTH;
+        int initializeSize = DEFAULT_WIDTH;
 
         int mode = MeasureSpec.getMode(measureSpec);
         int size = MeasureSpec.getSize(measureSpec);
@@ -64,14 +64,14 @@ public class RoundRectView extends View {
              * on the child. It can be whatever size it wants.
              */
             case MeasureSpec.UNSPECIFIED:
-                mySize = defaultSize;
+                initializeSize = defaultSize;
                 break;
             /**
              *  The child can be as large as it wants up
              *  to the specified size.
              */
             case MeasureSpec.AT_MOST:
-                mySize = size;
+                initializeSize = size;
                 break;
             /**
              * The parent has determined an exact size for the child.
@@ -79,11 +79,11 @@ public class RoundRectView extends View {
              * big it wants to be.
              */
             case MeasureSpec.EXACTLY:
-                mySize = size;
+                initializeSize = size;
                 break;
         }
 
-        return mySize;
+        return initializeSize;
     }
 
     /**
@@ -112,11 +112,8 @@ public class RoundRectView extends View {
 
     private void curveOriginal(Canvas canvas){
         if(number == 0){
-
             drawingStroke(canvas,DEFAULT_NUMBER, Paint.Style.STROKE);
-
         }else {
-
             int drawFillNumber = DEFAULT_NUMBER - number;
 
             try{
