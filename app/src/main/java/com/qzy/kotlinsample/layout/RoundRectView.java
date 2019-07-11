@@ -12,8 +12,8 @@ import com.socks.library.KLog;
 
 
 /**
- * @author TanHao
- * create by 7.8/2019
+ * @author tanhaoshi
+ * @time   7/8 2019
  */
 public class RoundRectView extends View {
 
@@ -62,6 +62,7 @@ public class RoundRectView extends View {
             /**
              * The parent has not imposed any constraint
              * on the child. It can be whatever size it wants.
+             * 如果没有指定大小 就设置为默认大小
              */
             case MeasureSpec.UNSPECIFIED:
                 initializeSize = defaultSize;
@@ -69,6 +70,7 @@ public class RoundRectView extends View {
             /**
              *  The child can be as large as it wants up
              *  to the specified size.
+             *  如果测量模式是取最大值为size
              */
             case MeasureSpec.AT_MOST:
                 initializeSize = size;
@@ -77,6 +79,7 @@ public class RoundRectView extends View {
              * The parent has determined an exact size for the child.
              * The child is going to be given those bounds regardless of how
              * big it wants to be.
+             * 如果是固定的大小 就不用去改变它的大小
              */
             case MeasureSpec.EXACTLY:
                 initializeSize = size;

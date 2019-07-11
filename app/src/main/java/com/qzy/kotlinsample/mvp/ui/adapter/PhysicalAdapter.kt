@@ -10,7 +10,7 @@ import com.qzy.kotlinsample.layout.RoundRectView
 
 class PhysicalAdapter :RecyclerView.Adapter<PhysicalAdapter.PhysicalViewHolder> {
 
-    private var list : List<Int>? = null
+    var list : List<Int>? = null
             set(list) {
                 field = list
                 notifyDataSetChanged()

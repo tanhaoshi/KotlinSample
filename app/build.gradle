@@ -22,11 +22,11 @@ android {
 }
 
 dependencies {
-
     // library
     implementation "com.android.support:appcompat-v7:$supportVersion"
     implementation "com.android.support.constraint:constraint-layout:$constraintVersion"
     implementation "com.android.support:recyclerview-v7:$recyclerVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     //log
     implementation "com.github.zhaokaiqiang.klog:library:$logVersion"
@@ -36,7 +36,6 @@ dependencies {
 
     androidTestImplementation "com.android.support.test:runner:$runnerVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {
     mavenCentral()

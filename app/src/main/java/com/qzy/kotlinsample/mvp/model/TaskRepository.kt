@@ -1,6 +1,15 @@
 package com.qzy.kotlinsample.mvp.model
 
-class TaskRepository (val tasksDataSource: TasksDataSource){
+
+class TaskRepository (val tasksDataSource: TasksDataSource) : TasksDataSource{
+
+    override fun getProgressData(call: TasksDataSource.LoadProgressCallBack) {
+        tasksDataSource.getProgressData(call)
+    }
+
+    override fun getTasks(callback: TasksDataSource.LoadTasksCallback) {
+        tasksDataSource.getTasks(callback)
+    }
 
     companion object {
 
