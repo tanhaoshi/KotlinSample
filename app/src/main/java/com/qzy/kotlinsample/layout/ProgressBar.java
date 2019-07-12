@@ -21,10 +21,16 @@ import java.util.List;
 public class ProgressBar extends View{
 
     private static final int DEFAULT_WIDTH  = 300;
-    private static final int DEFAULT_HEIGHT = 18;
+    private static final int DEFAULT_HEIGHT = 36;
 
     private int width;
     private int height;
+
+    private int position = 0;
+
+    private final Paint mPaint = new Paint();
+
+    private List<ScaleProgress> mProgressList;
 
     public ProgressBar(Context context) {
         super(context);
@@ -67,11 +73,12 @@ public class ProgressBar extends View{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        curveOriginal(canvas);
+        try{
+            curveOriginal(canvas);
+        }finally {
+            fillProgressBar(canvas,position);
+        }
     }
-
-    private final Paint mPaint = new Paint();
-    private List<ScaleProgress> mProgressList;
 
     private void init(){
         mPaint.setAntiAlias(true);
@@ -84,28 +91,86 @@ public class ProgressBar extends View{
         postInvalidate();
     }
 
+    public void postDelayInvalidate(int position){
+        this.position = position;
+        postInvalidate();
+    }
+
     private void curveOriginal(Canvas canvas){
         if(mProgressList == null) return;
 
         int size = mProgressList.size();
 
+        mPaint.setColor(getContext().getResources().getColor(R.color.grayColor));
+
         float left = 0;
         float right = 0;
-
+        /**
+         look over temp right = 180.0
+         look over temp right = 270.0
+         look over temp right = 180.0
+         look over temp right = 225.0
+         look over temp right = 45.0
+         */
         for(int i=0; i<size; i++){
-
             float top = Float.valueOf((float) (height-height * mProgressList.get(i).getScaleTop()));
-
             float tempRight = Float.valueOf((float) (width * mProgressList.get(i).getScaleWidth()));
 
             RectF f = new RectF(left,top, right + tempRight , height);
-
             canvas.drawRect(f,mPaint);
 
             left  += (float) (width * mProgressList.get(i).getScaleWidth());
-
             right += tempRight;
         }
+    }
+
+    private float right = 0;
+    private float left  = 0;
+    private float nextLeft = 0;
+
+    private int   lastPosition = 0;
+
+    public void fillProgressBar(Canvas canvas,int position){
+        if(lastPosition != position){
+            nextLeft = Float.valueOf((float) (width * mProgressList.get(lastPosition).getScaleWidth()));
+            lastPosition = position;
+        }
+
+        float reLeft     = 0;
+        float reRight    = 0;
+
+        for(int i=0; i<position; i++){
+            if(i == position) break;
+
+            mPaint.setColor(mProgressList.get(i).getSignalColor());
+
+            float top = Float.valueOf((float)(height-height * mProgressList.get(i).getScaleTop()));
+            float tempRight = Float.valueOf((float) (width * mProgressList.get(i).getScaleWidth()));
+
+            RectF f = new RectF(reLeft,top, tempRight+reRight , height);
+            canvas.drawRect(f,mPaint);
+
+            KLog.i("look over re left value = " + reLeft);
+            if(i >= 2){
+                reLeft += (float) (width * mProgressList.get(i-1).getScaleWidth());
+            }else{
+                reLeft += (float) (width * mProgressList.get(i).getScaleWidth());
+            }
+            KLog.i("look over re left value += " + reLeft);
+            reRight += tempRight;
+        }
+
+        mPaint.setColor(mProgressList.get(position).getSignalColor());
+        mPaint.setStyle(Paint.Style.FILL);
+
+        float tempRight = Float.valueOf((float) (width * mProgressList.get(position).getScaleWidth()))
+                / (mProgressList.get(position).getSecond() / 2);
+        float top  = Float.valueOf((float) (height-height * mProgressList.get(position).getScaleTop()));
+
+        RectF rectF = new RectF(left+nextLeft,top,right+tempRight,height);
+        canvas.drawRect(rectF,mPaint);
+
+        right += tempRight;
     }
 
 }

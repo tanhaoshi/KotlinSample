@@ -6,6 +6,7 @@ public class ScaleProgress {
     private Double scaleWidth;
     private int   actionNumber;
     private int   signalColor;
+    private long  second;
 
     public ScaleProgress(Double scaleTop, Double scaleWidth, int actionNumber) {
         this.scaleTop = scaleTop;
@@ -43,5 +44,13 @@ public class ScaleProgress {
 
     public void setSignalColor(int signalColor) {
         this.signalColor = signalColor;
+    }
+
+    public long getSecond() {
+        return second;
+    }
+
+    public void setSecond(long second) {
+        this.second = second;
     }
 }

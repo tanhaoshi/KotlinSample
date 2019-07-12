@@ -1,9 +1,12 @@
 package com.qzy.kotlinsample.mvp.ui.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.support.annotation.ColorInt
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +14,20 @@ import com.qzy.kotlinsample.R
 import com.qzy.kotlinsample.mvp.contract.PhysicalContract
 import com.qzy.kotlinsample.mvp.datamodel.ScaleProgress
 import com.qzy.kotlinsample.mvp.ui.adapter.PhysicalAdapter
+import com.socks.library.KLog
 import kotlinx.android.synthetic.main.fragment_physical.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class PhysicalFragment : Fragment() , PhysicalContract.View{
 
     override lateinit var presenter: PhysicalContract.Presenter
 
     private lateinit var physicalAdapter : PhysicalAdapter
+
+    private lateinit var timer : Timer
+
+    private lateinit var list: List<ScaleProgress>
 
     companion object {
 
@@ -49,12 +59,65 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
     }
 
     override fun showProgressTasks(list: List<ScaleProgress>) {
-
         for(item in list){
             item.signalColor = resources.getColor(R.color.grayColor)
         }
 
+        this.list = list
+
         progressBar.postInvalidateAction(list)
+
+        startTimer()
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private fun startTimer(){
+
+        timer = Timer()
+
+        for(item in list.indices){
+            when(item){
+                0 -> transform(0,60,R.color.redColor)
+                1 -> transform(1,120,R.color.yellowColor)
+                2 -> transform(2,60,R.color.greenColor)
+                3 -> transform(3,60,R.color.blueColor)
+                4 -> transform(4,60,R.color.violetColor)
+            }
+        }
+
+        var dateTime : Long = 0
+        var nextPosition : Int = 0
+
+        timer.schedule(object: TimerTask(){
+            override fun run() {
+                if(nextPosition == list.size){
+                    timer.cancel()
+                    return
+                }
+
+                if(dateTime <= (list.get(nextPosition).second) * 1000){
+                    progressBar.postDelayInvalidate(nextPosition)
+                    dateTime += 2000
+                }else{
+                    nextPosition += 1
+                    dateTime = 0
+                }
+            }
+        },0,2000)
+    }
+
+    @SuppressLint("ResourceType")
+    private inline fun transform(position: Int, second: Long, @ColorInt color:Int){
+        list.get(position).second = second
+        list.get(position).signalColor = resources.getColor(color)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        checkNotNull(timer)
+        timer.cancel()
     }
 
 }
+
+
