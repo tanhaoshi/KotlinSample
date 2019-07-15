@@ -5,13 +5,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <com.qzy.kotlinsample.layout.RoundRectView
+    <com.qzy.spinning.layout.RoundRectView
         android:id="@+id/roundRect"
         android:layout_width="100dp"
         android:layout_height="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         >
-    </com.qzy.kotlinsample.layout.RoundRectView>
+    </com.qzy.spinning.layout.RoundRectView>
 
 </android.support.constraint.ConstraintLayout>
