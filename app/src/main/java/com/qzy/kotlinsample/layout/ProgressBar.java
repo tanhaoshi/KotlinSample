@@ -66,7 +66,6 @@ public class ProgressBar extends View{
                 initializeWidth = size;
                 break;
         }
-
         return initializeWidth;
     }
 
@@ -105,13 +104,7 @@ public class ProgressBar extends View{
 
         float left = 0;
         float right = 0;
-        /**
-         look over temp right = 180.0
-         look over temp right = 270.0
-         look over temp right = 180.0
-         look over temp right = 225.0
-         look over temp right = 45.0
-         */
+
         for(int i=0; i<size; i++){
             float top = Float.valueOf((float) (height-height * mProgressList.get(i).getScaleTop()));
             float tempRight = Float.valueOf((float) (width * mProgressList.get(i).getScaleWidth()));
@@ -132,7 +125,7 @@ public class ProgressBar extends View{
 
     public void fillProgressBar(Canvas canvas,int position){
         if(lastPosition != position){
-            nextLeft = Float.valueOf((float) (width * mProgressList.get(lastPosition).getScaleWidth()));
+            nextLeft += Float.valueOf((float) (width * mProgressList.get(lastPosition).getScaleWidth()));
             lastPosition = position;
         }
 
@@ -141,7 +134,6 @@ public class ProgressBar extends View{
 
         for(int i=0; i<position; i++){
             if(i == position) break;
-
             mPaint.setColor(mProgressList.get(i).getSignalColor());
 
             float top = Float.valueOf((float)(height-height * mProgressList.get(i).getScaleTop()));
@@ -150,13 +142,7 @@ public class ProgressBar extends View{
             RectF f = new RectF(reLeft,top, tempRight+reRight , height);
             canvas.drawRect(f,mPaint);
 
-            KLog.i("look over re left value = " + reLeft);
-            if(i >= 2){
-                reLeft += (float) (width * mProgressList.get(i-1).getScaleWidth());
-            }else{
-                reLeft += (float) (width * mProgressList.get(i).getScaleWidth());
-            }
-            KLog.i("look over re left value += " + reLeft);
+            reLeft += (float) (width * mProgressList.get(i).getScaleWidth());
             reRight += tempRight;
         }
 
