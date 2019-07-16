@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".mvp.ui.activity.PhysicalActivity"
+            android:theme="@style/CommonViewStyle"
             android:configChanges="orientation|keyboard|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

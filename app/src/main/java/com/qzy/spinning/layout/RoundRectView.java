@@ -4,11 +4,14 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.qzy.spinning.R;
 import com.socks.library.KLog;
+
+import java.util.Random;
 
 
 /**
@@ -28,6 +31,8 @@ public class RoundRectView extends View {
 
     private int number = 0;
 
+    private int fillColor;
+
     private final Paint innerPaint = new Paint();
 
     public RoundRectView(Context context) {
@@ -36,10 +41,6 @@ public class RoundRectView extends View {
 
     public RoundRectView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-        innerPaint.setColor(getContext().getResources().getColor(R.color.colorAccent));
-        innerPaint.setStyle(Paint.Style.STROKE);
-        innerPaint.setStrokeWidth(5);
         innerPaint.setAntiAlias(true);
     }
 
@@ -54,7 +55,6 @@ public class RoundRectView extends View {
 
     private int translateViewSize(int defaultSize,int measureSpec){
         int initializeSize = DEFAULT_WIDTH;
-
         int mode = MeasureSpec.getMode(measureSpec);
         int size = MeasureSpec.getSize(measureSpec);
 
@@ -115,13 +115,13 @@ public class RoundRectView extends View {
 
     private void curveOriginal(Canvas canvas){
         if(number == 0){
-            drawingStroke(canvas,DEFAULT_NUMBER, Paint.Style.STROKE);
+            drawingStroke(canvas,DEFAULT_NUMBER, Paint.Style.FILL);
         }else {
             int drawFillNumber = DEFAULT_NUMBER - number;
 
             try{
 
-                drawingStroke(canvas,drawFillNumber,Paint.Style.STROKE);
+                drawingStroke(canvas,drawFillNumber,Paint.Style.FILL);
 
             }finally {
 
@@ -133,38 +133,49 @@ public class RoundRectView extends View {
 
     private void drawingStroke(Canvas canvas,int number,Paint.Style style) {
         innerPaint.setStyle(style);
+        innerPaint.setColor(getContext().getResources().getColor(R.color.transparent));
 
-        int fixedHeight = 20;
-        int rectHeight = 0;
-        int specHeight = 50;
+        float signal = height / 11;
+        float fixedHeight = signal / 3;
+        float rectHeight = 0;
+        float specHeight = signal;
 
         for (int i = 0; i < number; i++) {
-            RectF rectF = new RectF(fixedHeight, fixedHeight + rectHeight, width - 19, specHeight);
+            RectF rectF = new RectF(0, fixedHeight + rectHeight, width - 19, specHeight);
             canvas.drawRoundRect(rectF, 18, 18, innerPaint);
 
-            specHeight += 50;
-            rectHeight += 50;
+            specHeight += signal;
+            rectHeight += signal;
         }
     }
 
     private void drawingFill(Canvas canvas,int number,Paint.Style style){
         innerPaint.setStyle(style);
+        innerPaint.setColor(fillColor);
 
-        int fixedHeight = 20;
-        int rectHeight = 50 * (DEFAULT_NUMBER - number) ;
-        int specHeight = 50 * (DEFAULT_NUMBER - number + 1);
+        float signal = height / 11;
+        float fixedHeight = signal/3;
+        float rectHeight = signal * (DEFAULT_NUMBER - number) ;
+        float specHeight = signal * (DEFAULT_NUMBER - number + 1);
 
         for (int i = 0; i < number; i++) {
-            RectF rectF = new RectF(fixedHeight, fixedHeight + rectHeight, width - 19, specHeight);
+            RectF rectF = new RectF(0, fixedHeight + rectHeight, width - 19, specHeight);
             canvas.drawRoundRect(rectF, 18, 18, innerPaint);
 
-            specHeight += 50;
-            rectHeight += 50;
+            specHeight += signal;
+            rectHeight += signal;
         }
     }
 
     public void postInvalidate(int number){
         this.number = number;
         postInvalidate();
+        fillColor = getRandColor();
+    }
+
+    private int getRandColor(){
+        Random random = new Random();
+        int ranColor = 0xff000000 | random.nextInt(0x00ffffff);
+        return ranColor;
     }
 }

@@ -31,8 +31,11 @@ dependencies {
     //log
     implementation "com.github.zhaokaiqiang.klog:library:$logVersion"
 
+    //glide
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+
+    implementation "com.android.support.constraint:constraint-layout:$constraintVersion"
     // test
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation "junit:junit:$junitVersion"
 
     androidTestImplementation "com.android.support.test:runner:$runnerVersion"

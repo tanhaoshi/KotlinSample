@@ -37,5 +37,4 @@ class PhysicalAdapter :RecyclerView.Adapter<PhysicalAdapter.PhysicalViewHolder> 
     class PhysicalViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView){
         var roundRect : RoundRectView = itemView.findViewById(R.id.roundRect)
     }
-
 }

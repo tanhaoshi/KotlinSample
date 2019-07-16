@@ -3,10 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-
     <color name="green">#FF3AB419</color>
 
-    <color name="white">#fff</color>
+    <color name="white">#ffffff</color>
+
+    <color name="transparent">#33ffffff</color>
 
     <color name="grayColor">#FF8C8585</color>
 
@@ -15,5 +16,8 @@
     <color name="greenColor">#FF74E842</color>
     <color name="blueColor">#FF42BFE8</color>
     <color name="violetColor">#FFB942E8</color>
+
+    <color name="gradientStartColor">#175EB5</color>
+    <color name="gradientEndColor">#053D80</color>
 
 </resources>

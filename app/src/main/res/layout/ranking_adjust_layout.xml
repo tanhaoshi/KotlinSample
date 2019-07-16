@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/ranking_gradient"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="68dp"
+        android:layout_height="24dp"
+        android:text="热身调整"
+        android:textColor="#ffffffff"
+        android:textSize="17sp"/>
+
+    <TextView
+        app:layout_constraintLeft_toRightOf="@+id/title"
+        android:layout_width="80dp"
+        android:layout_height="16dp"
+        android:text="Next：集合骑行"
+        android:textColor="#ffffffff"
+        android:textSize="11sp"/>
+
+</android.support.constraint.ConstraintLayout>

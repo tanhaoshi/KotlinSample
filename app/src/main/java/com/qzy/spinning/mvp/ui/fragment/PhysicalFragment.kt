@@ -14,6 +14,7 @@ import com.qzy.spinning.mvp.contract.PhysicalContract
 import com.qzy.spinning.mvp.datamodel.RankingData
 import com.qzy.spinning.mvp.datamodel.ScaleProgress
 import com.qzy.spinning.mvp.ui.adapter.PhysicalAdapter
+import com.qzy.spinning.mvp.ui.adapter.RankingAdapter
 import kotlinx.android.synthetic.main.fragment_physical.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -23,6 +24,8 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
     override lateinit var presenter: PhysicalContract.Presenter
 
     private lateinit var physicalAdapter : PhysicalAdapter
+
+    private lateinit var rankingAdapter: RankingAdapter
 
     private lateinit var timer : Timer
 
@@ -59,8 +62,9 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
             var  recyclerView = findViewById<RecyclerView>(R.id.ranking_rc).also {
                 it.layoutManager = LinearLayoutManager(activity)
             }
+            rankingAdapter = RankingAdapter(ArrayList(0),activity!!)
 
-
+            recyclerView.adapter = rankingAdapter
         }
 
         return root
@@ -83,12 +87,11 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
     }
 
     override fun showRankingTasks(list: List<RankingData>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        rankingAdapter.list = list
     }
 
     @SuppressLint("ResourceAsColor")
     private fun startTimer(){
-
         timer = Timer()
 
         for(item in list.indices){
@@ -98,6 +101,8 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
                 2 -> transform(2,60,R.color.greenColor)
                 3 -> transform(3,60,R.color.blueColor)
                 4 -> transform(4,60,R.color.violetColor)
+                5 -> transform(5,70,R.color.yellowColor)
+                6 -> transform(6,150,R.color.redColor)
             }
         }
 
