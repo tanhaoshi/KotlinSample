@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/ranking_detail_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/grip_text"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/white"
+        android:text="@string/ranking_grip"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    
+    <ImageView
+        android:id="@+id/grip_img"
+        app:layout_constraintLeft_toRightOf="@+id/grip_text"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/grip_three"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="24dp"
+        android:layout_width="64dp"
+        android:layout_height="40dp"/>
+
+    <RelativeLayout
+        android:id="@+id/placeholder_detail"
+        app:layout_constraintTop_toBottomOf="@+id/grip_img"
+        android:layout_marginTop="22dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp">
+
+        <TextView
+            android:id="@+id/progress_text"
+            android:text="@string/ranking_opposition"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <FrameLayout
+            android:layout_toRightOf="@+id/progress_text"
+            android:layout_marginLeft="6dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.qzy.spinning.layout.GripProgressView
+                android:id="@+id/gripProgress"
+                android:layout_gravity="center"
+                app:batteryColor="@color/ranking_grip_bg"
+                app:batteryPower="0"
+                app:batteryOrientation="horizontal"
+                android:layout_width="108dp"
+                android:layout_height="14dp"/>
+
+            <TextView
+                android:id="@+id/percent"
+                android:text="40%"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:textSize="7sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/target_frequency"
+        android:text="@string/ranking_target_frequency"
+        android:layout_marginLeft="15dp"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/placeholder_detail"
+        android:layout_marginTop="28dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/target_count"
+        android:textSize="11sp"
+        android:textColor="@color/white"
+        android:text="125分/次"
+        android:layout_marginTop="28dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/placeholder_detail"
+        app:layout_constraintLeft_toRightOf="@+id/target_frequency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/target_heartRate"
+        android:text="@string/ranking_heart_rate"
+        android:layout_marginLeft="15dp"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/target_frequency"
+        android:layout_marginTop="28dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@+id/target_frequency"
+        android:layout_marginTop="28dp"
+        app:layout_constraintLeft_toRightOf="@+id/target_heartRate"
+        android:background="@color/ranking_heart_rate"
+        android:layout_marginLeft="8dp"
+        android:layout_width="112dp"
+        android:layout_height="18dp"
+        android:textAlignment="center"
+        android:text="脂肪燃烧：70%-80%"
+        android:textColor="@color/white"
+        android:textSize="11sp"/>
+
+    <TextView
+        android:id="@+id/target_gesture"
+        android:text="@string/ranking_gesture"
+        android:layout_marginLeft="15dp"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/target_heartRate"
+        android:layout_marginTop="14dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/target_action_step"
+        android:text="@string/ranking_action_step"
+        android:layout_marginLeft="15dp"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:singleLine="false"
+        android:lineSpacingExtra="12dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/target_gesture"
+        android:layout_marginTop="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</android.support.constraint.ConstraintLayout>

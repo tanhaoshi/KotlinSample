@@ -4,29 +4,31 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.qzy.spinning.R;
 
 
-public class BatteryView extends View {
+public class GripProgressView extends View {
 
     private int mPower = 100;
     private int orientation;
     private int width;
     private int height;
     private int mColor;
-    private Context mContext;
 
-    public BatteryView(Context context) {
+    private final Paint paint = new Paint();
+
+    public GripProgressView(Context context) {
         super(context);
-        mContext = context;
     }
 
-    public BatteryView(Context context, AttributeSet attrs) {
+    public GripProgressView(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.Battery);
         mColor = typedArray.getColor(R.styleable.Battery_batteryColor, 0xFFFFFFFF);
@@ -60,45 +62,28 @@ public class BatteryView extends View {
     }
 
     private void drawHorizontalBattery(Canvas canvas) {
-        Paint paint = new Paint();
         paint.setColor(mColor);
-        paint.setStyle(Paint.Style.STROKE);
+        paint.setAntiAlias(true);
+        paint.setShader(null);
 
         float strokeWidth = width / 20.f;
         float strokeWidth_2 = strokeWidth / 2;
 
-        paint.setStrokeWidth(strokeWidth);
-
         RectF r1 = new RectF(strokeWidth_2, strokeWidth_2, width - strokeWidth - strokeWidth_2, height - strokeWidth_2);
-        canvas.drawRoundRect(r1,5,10, paint);
-        paint.setStrokeWidth(0);
-        paint.setStyle(Paint.Style.FILL);
+        canvas.drawRoundRect(r1,12,12, paint);
 
         float offset = (width - strokeWidth * 2) * mPower / 100.f;
-        RectF r2 = new RectF(strokeWidth, strokeWidth, offset, height - strokeWidth);
 
-        if(mPower == 0){
-            paint.setColor(Color.WHITE);
-        }
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(getContext().getColor(R.color.grip_start));
+        LinearGradient linearGradient = new LinearGradient(strokeWidth_2, strokeWidth_2, offset, height - strokeWidth_2,
+                getContext().getColor(R.color.grip_start),
+                getContext().getColor(R.color.grip_end), Shader.TileMode.MIRROR);
 
-        if (mPower < 20) {
-            paint.setColor(Color.RED);
-        }
-        if (mPower >= 30) {
-            paint.setColor(getResources().getColor(R.color.green));
-        }
-        canvas.drawRoundRect(r2,5,10, paint);
-        /**
-         *
-         *   1----------1
-         *   1          1-
-         *   1----------1
-         *
-         */
+        paint.setShader(linearGradient);
 
-        RectF r3 = new RectF(width - strokeWidth, height * 0.25f, width, height * 0.75f);
-        paint.setColor(getResources().getColor(R.color.white));
-        canvas.drawRect(r3, paint);
+        RectF r2 = new RectF(strokeWidth_2, strokeWidth_2, offset, height - strokeWidth_2);
+        canvas.drawRoundRect(r2,12,12, paint);
     }
 
 
@@ -128,7 +113,6 @@ public class BatteryView extends View {
         canvas.drawRect(headRect, paint);
     }
 
-
     public void setPower(int power) {
         this.mPower = power;
         if (mPower < 0) {
@@ -136,7 +120,6 @@ public class BatteryView extends View {
         }
         invalidate();
     }
-
 
     public void setColor(int color) {
         this.mColor = color;

@@ -20,4 +20,13 @@
     <color name="gradientStartColor">#175EB5</color>
     <color name="gradientEndColor">#053D80</color>
 
+
+    <color name="ranking_detail_bg">#26175EB5</color>
+    <color name="ranking_grip_bg">#33025FF1</color>
+
+    <color name="grip_start">#FFC88A</color>
+    <color name="grip_end">#FF3D3E</color>
+
+    <color name="ranking_heart_rate">#025FF1</color>
+
 </resources>

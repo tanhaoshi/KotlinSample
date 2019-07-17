@@ -141,7 +141,7 @@ public class RoundRectView extends View {
         float specHeight = signal;
 
         for (int i = 0; i < number; i++) {
-            RectF rectF = new RectF(0, fixedHeight + rectHeight, width - 19, specHeight);
+            RectF rectF = new RectF(9.5f, fixedHeight + rectHeight, width - 9.5f, specHeight);
             canvas.drawRoundRect(rectF, 18, 18, innerPaint);
 
             specHeight += signal;
@@ -159,7 +159,7 @@ public class RoundRectView extends View {
         float specHeight = signal * (DEFAULT_NUMBER - number + 1);
 
         for (int i = 0; i < number; i++) {
-            RectF rectF = new RectF(0, fixedHeight + rectHeight, width - 19, specHeight);
+            RectF rectF = new RectF(9.5f, fixedHeight + rectHeight, width - 9.5f, specHeight);
             canvas.drawRoundRect(rectF, 18, 18, innerPaint);
 
             specHeight += signal;

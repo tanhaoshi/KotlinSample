@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">SPINNING</string>
+
+    <string name="ranking_grip">把手位置:</string>
+    <string name="ranking_opposition">阻力强度:</string>
+    <string name="ranking_target_frequency">目标踏频:</string>
+    <string name="ranking_heart_rate">心率强度:</string>
+    <string name="ranking_gesture">姿势要领:</string>
+
+    <string name="ranking_action_step">1.臀部稍微后移, 上身保持不变;\n2.腹部内收, 抬胸, 收肩向后;\n3.放松, 眼睛位于车把前方。
+    </string>
+
 </resources>

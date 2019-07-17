@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.qzy.spinning.R
+import com.qzy.spinning.layout.GripProgressView
 import com.qzy.spinning.mvp.contract.PhysicalContract
 import com.qzy.spinning.mvp.datamodel.RankingData
 import com.qzy.spinning.mvp.datamodel.ScaleProgress
@@ -56,15 +57,17 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
             physicalAdapter = PhysicalAdapter(ArrayList(0), activity!!)
 
             recyclerView.adapter = physicalAdapter
-        }
 
-        with(root){
-            var  recyclerView = findViewById<RecyclerView>(R.id.ranking_rc).also {
+            var  rankingRecyclerView = findViewById<RecyclerView>(R.id.ranking_rc).also {
                 it.layoutManager = LinearLayoutManager(activity)
             }
             rankingAdapter = RankingAdapter(ArrayList(0),activity!!)
 
-            recyclerView.adapter = rankingAdapter
+            rankingRecyclerView.adapter = rankingAdapter
+
+            var gripProgress = findViewById<GripProgressView>(R.id.gripProgress).also {
+                it.power = 40
+            }
         }
 
         return root

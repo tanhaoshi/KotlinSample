@@ -55,14 +55,10 @@ class RankingAdapter : RecyclerView.Adapter<RankingAdapter.RankingViewHolder>{
     }
 
     private fun toSpecial(position: Int,rankingViewHolder: RankingViewHolder){
-        if(position == 0){
-            Glide.with(context).load(R.drawable.ranking_one).into(rankingViewHolder.ranking_img)
-        }
-        if(position == 1){
-            Glide.with(context).load(R.drawable.ranking_two).into(rankingViewHolder.ranking_img)
-        }
-        if(position == 2){
-            Glide.with(context).load(R.drawable.ranking_three).into(rankingViewHolder.ranking_img)
+        when(position){
+            0 -> Glide.with(context).load(R.drawable.ranking_one).into(rankingViewHolder.ranking_img)
+            1 -> Glide.with(context).load(R.drawable.ranking_two).into(rankingViewHolder.ranking_img)
+            2 -> Glide.with(context).load(R.drawable.ranking_three).into(rankingViewHolder.ranking_img)
         }
         Glide.with(context).load(list?.get(position)?.photoPath).into(rankingViewHolder.ranking_photo)
         rankingViewHolder.name.setText(list?.get(position)?.name)
