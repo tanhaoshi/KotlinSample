@@ -54,7 +54,7 @@ public class RoundRectView extends View {
     }
 
     private int translateViewSize(int defaultSize,int measureSpec){
-        int initializeSize = DEFAULT_WIDTH;
+        int initializeSize = defaultSize;
         int mode = MeasureSpec.getMode(measureSpec);
         int size = MeasureSpec.getSize(measureSpec);
 

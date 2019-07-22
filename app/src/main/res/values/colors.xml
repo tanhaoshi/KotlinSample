@@ -29,4 +29,6 @@
 
     <color name="ranking_heart_rate">#025FF1</color>
 
+    <color name="transparentColor">#99FFFFFF</color>
+
 </resources>
