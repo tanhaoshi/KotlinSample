@@ -11,5 +11,41 @@
     </string>
 
     <string name="course_title">动感单车初级燃脂课</string>
+    <string name="duration">时长:</string>
+    <string name="fat">燃脂:</string>
+
+    <string name="instrument">辅助器械:</string>
+    <string name="for_people">适合人群:</string>
+    <string name="forbid_people">禁忌人群:</string>
+
+    <string name="action_step">1.双手后放在扶手上 注意尽量不要把身体的重量往双手上给 双手的力量只要能够保持住身体平衡就OK 否则会影响效果的 我一般是用3个手指头轻轻抓住
+    \n2.尽量让自己大腿 腹部 臀部在使用力气 因为这三个部分才是动感单车的目标所在\n3.给自己动感音乐 踏着音乐的节奏1到3分钟内换此速度和坡度\n4.多冲击一下自己的极限 会使身体十分有活力
+    </string>
+
+    <string name="bike_select">趣味动感单车</string>
+    <string name="roam_select">实景漫游</string>
+
+    <string name="smart_course">智能团课</string>
+    <string name="mine_course">我的团课</string>
+
+    <string name="qr_explain">请使用"快乐健身"小程序扫码免费激活或微信支付</string>
+
+    <string name="explain_buy">购买</string>
+
+    <string name="degree_of_difficulty">难度系数</string>
+    <string name="impose_favorable">限时优惠</string>
+
+    <string name="initial_price_name">原价</string>
+
+    <string name="course_label">课程标签</string>
+    <string name="course_duration">课程时长</string>
+    <string name="course_consume">课程消耗</string>
+    <string name="course_introduce">课程介绍</string>
+
+    <string name="course_introduce_content">动感单车是健身房中运动量最大的器械之一，对体能的要求非常高，通常一堂课能消耗500卡左右的热量，同时也排出很多汗液，身体的水分流失很快，因此要及时补水。但是大量的水分流失并不代表它是靠“减水”来减肥的，如果你在运动的时候带上心率表，就会很清楚地看见自己在运动过程中，从哪一刻开始就完全是在消耗脂肪了。</string>
+
+    <string name="suitable_human">合适人群</string>
+    <string name="taboo_human">禁忌人群</string>
+
 
 </resources>

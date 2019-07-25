@@ -8,22 +8,30 @@ import com.bin.david.form.data.style.FontStyle
 import com.bin.david.form.data.style.LineStyle
 import com.bin.david.form.data.table.TableData
 import com.qzy.spinning.R
+import com.qzy.spinning.layout.StarBarView
 import com.qzy.spinning.mvp.datamodel.CourseContent
 import com.qzy.spinning.mvp.datamodel.CourseDetails
 import com.qzy.spinning.mvp.datamodel.CourseDurantion
 import kotlinx.android.synthetic.main.activity_course_description.*
 import kotlinx.android.synthetic.main.activity_course_description.view.*
+import kotlinx.android.synthetic.main.course_include_layout.*
 import java.util.ArrayList
 
 class CourseDescriptionActivity : AppCompatActivity() {
 
     var courseList = ArrayList<CourseContent>()
 
+    var starBarView: StarBarView ?= null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_description)
 
         var smartTable = smartTable
+
+        starBarView = star
+
+        starBarView ?.setStartConut(4)
 
         for(item in 0..3){
 
@@ -61,7 +69,7 @@ class CourseDescriptionActivity : AppCompatActivity() {
 
         smartTable.config.verticalPadding = 12
 
-        smartTable.config.horizontalPadding = 80
+        smartTable.config.horizontalPadding = 85
 
         FontStyle.setDefaultTextSize(15)
 
@@ -74,6 +82,7 @@ class CourseDescriptionActivity : AppCompatActivity() {
         smartTable.config.columnTitleGridStyle = lineStyle
 
         smartTable.tableData = tableData
+
     }
 
 }

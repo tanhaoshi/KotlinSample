@@ -13,14 +13,62 @@
             android:name=".mvp.ui.activity.PhysicalActivity"
             android:configChanges="orientation|keyboard|screenSize"
             android:theme="@style/CommonViewStyle">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN"/> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".mvp.ui.activity.CourseDescriptionActivity"
+            android:theme="@style/CommonViewStyle">
+        </activity>
+        <activity
+            android:name=".mvp.ui.activity.SplashActivity"
+            android:theme="@style/CommonViewStyle">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN"/> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".mvp.ui.activity.SmartCourseActivity"
+            android:theme="@style/CommonViewStyle">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN"/> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".mvp.ui.activity.QrCodeActivity"
+            android:theme="@style/CommonViewStyle">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN"/> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".mvp.ui.activity.CourseExplainActivity"
+            android:theme="@style/CommonViewStyle">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN"/>-->
 
                 <!--<category android:name="android.intent.category.LAUNCHER"/>-->
             <!--</intent-filter>-->
         </activity>
-        <activity android:name=".mvp.ui.activity.CourseDescriptionActivity"
-                    android:theme="@style/CommonViewStyle">
+        <activity android:name=".mvp.ui.activity.TodayRankingActivity"
+                  android:theme="@style/CommonViewStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

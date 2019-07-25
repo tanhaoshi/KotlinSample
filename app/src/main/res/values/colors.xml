@@ -31,4 +31,19 @@
 
     <color name="transparentColor">#99FFFFFF</color>
 
+    <color name="black">#2a2929</color>
+    <color name="unselected">#308DFF</color>
+
+    <color name="smartCourse_line">#175EB5</color>
+
+    <color name="course_level_bg">#4498FF</color>
+    <color name="course_price_bg">#FFBB00</color>
+
+    <color name="course_selector_bg">#142943</color>
+
+    <color name="course_use_count">#99161616</color>
+
+    <color name="course_explain_bg">#1A1C20</color>
+
+    <color name="course_price_color">#71B1FF</color>
 </resources>

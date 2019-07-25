@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ratingbar="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/courseName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="23dp"
+        android:layout_marginLeft="23dp"
+        android:text="动感单车中级燃脂课"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:background="@drawable/shape_buy"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="23dp"
+        app:layout_constraintLeft_toRightOf="@+id/courseName"
+        android:layout_marginLeft="23dp"
+        android:layout_width="110dp"
+        android:layout_height="31dp">
+        <ImageView
+            android:id="@+id/buyCar"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="23dp"
+            android:src="@drawable/explain_buy"
+            android:layout_width="20dp"
+            android:layout_height="18dp"/>
+
+        <TextView
+            android:id="@+id/buy_text"
+            android:text="@string/explain_buy"
+            android:textColor="@color/white"
+            android:layout_marginLeft="50dp"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/videoRl"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="73dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="23dp"
+        android:layout_width="193dp"
+        android:layout_height="180dp">
+        <ImageView
+            android:src="@drawable/course_sample"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:src="@drawable/video_play"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="55dp"
+            android:layout_height="55dp"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/degree_of_difficulty"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="34dp"
+        app:layout_constraintTop_toBottomOf="@+id/courseName"
+        android:layout_marginTop="16dp"
+        android:text="@string/degree_of_difficulty"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:layout_width="68dp"
+        android:layout_height="24dp"/>
+
+    <com.qzy.spinning.layout.StarBarView
+        android:id="@+id/star"
+        app:layout_constraintLeft_toRightOf="@+id/degree_of_difficulty"
+        android:layout_marginLeft="31dp"
+        app:layout_constraintTop_toBottomOf="@+id/courseName"
+        android:layout_marginTop="19dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ratingbar:starEmpty="@drawable/star"
+        ratingbar:starFill="@drawable/star"
+        ratingbar:starDistance="4dp"
+        ratingbar:starSize="16dp"/>
+    
+    <TextView
+        android:id="@+id/impose_favorable"
+        android:textSize="16sp"
+        android:text="@string/impose_favorable"
+        android:textColor="@color/course_price_color"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="34dp"
+        app:layout_constraintTop_toBottomOf="@+id/degree_of_difficulty"
+        android:layout_marginTop="15dp"
+        android:layout_width="68dp"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:id="@+id/favorable_price"
+        app:layout_constraintLeft_toRightOf="@+id/impose_favorable"
+        android:layout_marginLeft="28dp"
+        app:layout_constraintTop_toBottomOf="@+id/degree_of_difficulty"
+        android:layout_marginTop="15dp"
+        android:layout_width="64dp"
+        android:layout_height="24dp">
+
+        <TextView
+            android:id="@+id/course_price"
+            android:textColor="@color/course_price_color"
+            android:text="¥"
+            android:textSize="12sp"
+            android:layout_marginLeft="6dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/number"
+            android:layout_toRightOf="@+id/course_price"
+            android:textSize="17sp"
+            android:layout_marginLeft="4dp"
+            android:textColor="@color/course_price_color"
+            android:text="19"
+            android:layout_centerVertical="true"
+            android:gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/past"
+            android:text="/次"
+            android:layout_centerVertical="true"
+            android:textSize="9sp"
+            android:gravity="bottom"
+            android:layout_marginRight="8dp"
+            android:textColor="@color/course_price_color"
+            android:layout_toRightOf="@+id/number"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/initialPriceName"
+        android:textColor="@color/white"
+        android:text="@string/initial_price_name"
+        android:textSize="11sp"
+        app:layout_constraintLeft_toRightOf="@+id/favorable_price"
+        android:layout_marginLeft="11dp"
+        app:layout_constraintTop_toBottomOf="@+id/star"
+        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/initialPrice"
+        android:textColor="@color/white"
+        android:text="¥ 199"
+        android:textSize="11sp"
+        app:layout_constraintLeft_toRightOf="@+id/initialPriceName"
+        android:layout_marginLeft="11dp"
+        app:layout_constraintTop_toBottomOf="@+id/star"
+        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/label"
+        android:textColor="@color/white"
+        android:text="@string/course_label"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="34dp"
+        app:layout_constraintTop_toBottomOf="@+id/impose_favorable"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:layout_width="68dp"
+        android:layout_height="24dp"/>
+    
+    <com.qzy.spinning.layout.FlowLayout
+        android:id="@+id/flowLayout"
+        app:layout_constraintTop_toBottomOf="@+id/impose_favorable"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toRightOf="@+id/label"
+        android:layout_marginLeft="28dp"
+        android:layout_width="400dp"
+        android:layout_height="25dp">
+    </com.qzy.spinning.layout.FlowLayout>
+
+    <TextView
+        android:id="@+id/courseDuration"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="34dp"
+        app:layout_constraintTop_toBottomOf="@+id/label"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:text="@string/course_duration"
+        android:layout_width="68dp"
+        android:layout_height="24dp"/>
+
+    <TextView
+        android:id="@+id/duration"
+        app:layout_constraintLeft_toRightOf="@id/courseDuration"
+        android:layout_marginLeft="28dp"
+        app:layout_constraintTop_toBottomOf="@+id/flowLayout"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:text="40:00"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"/>
+
+    <TextView
+        android:id="@+id/course_consume"
+        app:layout_constraintTop_toBottomOf="@+id/courseDuration"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="34dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:text="@string/course_consume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/consume"
+        app:layout_constraintLeft_toRightOf="@+id/course_consume"
+        android:layout_marginLeft="34dp"
+        app:layout_constraintTop_toBottomOf="@+id/duration"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:text="66"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"/>
+
+    <TextView
+        android:id="@+id/unit"
+        app:layout_constraintTop_toBottomOf="@+id/duration"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toRightOf="@+id/consume"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:text="千卡"
+        android:gravity="bottom"
+        android:layout_marginBottom="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"/>
+
+    <TextView
+        android:id="@+id/course_introduce"
+        app:layout_constraintTop_toBottomOf="@+id/consume"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="34dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:text="@string/course_introduce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/course_introduce_content"
+        app:layout_constraintTop_toBottomOf="@+id/unit"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toRightOf="@+id/course_introduce"
+        android:layout_marginLeft="28dp"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:text="@string/course_introduce_content"
+        android:layout_width="677dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/suitable_human"
+        app:layout_constraintTop_toBottomOf="@+id/course_introduce"
+        android:layout_marginTop="49dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="34dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:text="@string/suitable_human"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/suitableHuman"
+        app:layout_constraintTop_toBottomOf="@+id/course_introduce"
+        android:layout_marginTop="49dp"
+        app:layout_constraintLeft_toRightOf="@+id/suitable_human"
+        android:layout_marginLeft="28dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:text="15-40岁健身者"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/taboo_human"
+        app:layout_constraintTop_toBottomOf="@+id/suitable_human"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="34dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:text="@string/taboo_human"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tabooHuman"
+        app:layout_constraintLeft_toRightOf="@+id/taboo_human"
+        android:layout_marginLeft="28dp"
+        app:layout_constraintTop_toBottomOf="@+id/suitable_human"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:text="患有骨质疏松或关节扭伤等疾病的人，不要轻易练习。"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</android.support.constraint.ConstraintLayout>

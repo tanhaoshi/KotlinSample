@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ratingbar="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="42dp">
+
+    <com.qzy.spinning.layout.StarBarView
+        android:id="@+id/star"
+        android:layout_gravity="bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ratingbar:starEmpty="@drawable/star"
+        ratingbar:starFill="@drawable/star"
+        ratingbar:starDistance="5dp"
+        ratingbar:starSize="15dp"/>
+
+    <TextView
+        android:text="@string/duration"
+        android:layout_marginLeft="18dp"
+        android:gravity="bottom|center_horizontal"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/duration"
+        android:gravity="bottom"
+        android:textColor="@color/white"
+        android:text="45:00"
+        android:layout_marginLeft="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+    
+    <TextView
+        android:text="@string/fat"
+        android:gravity="bottom"
+        android:layout_marginLeft="18dp"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/fat"
+        android:gravity="bottom"
+        android:text="120Kcal"
+        android:layout_marginLeft="12dp"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

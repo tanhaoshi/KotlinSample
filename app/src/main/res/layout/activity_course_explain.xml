@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".mvp.ui.activity.CourseExplainActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/course_explain_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/course_explain_layout"/>
+
+        <com.bin.david.form.core.SmartTable
+            android:id="@+id/smartTable"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="34dp"
+            android:layout_marginRight="34dp"
+            android:layout_marginBottom="34dp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
