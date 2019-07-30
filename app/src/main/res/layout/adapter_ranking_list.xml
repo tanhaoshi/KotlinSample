@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="700dp"
+    android:layout_height="39dp">
+
+    <TextView
+        android:id="@+id/rankingSort"
+        style="@style/ranking_item"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/ranking_character"
+        android:layout_marginLeft="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+    <com.qzy.spinning.layout.CircleImageView
+        android:id="@+id/rankingPhoto"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toRightOf="@+id/rankingSort"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/ranking_photo"
+        android:layout_marginLeft="63dp"
+        android:layout_width="22dp"
+        android:layout_height="18dp"/>
+
+    <TextView
+        android:id="@+id/rankingMember"
+        style="@style/ranking_item"
+        app:layout_constraintLeft_toRightOf="@+id/rankingPhoto"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/ranking_member"
+        android:layout_marginLeft="59dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/rankingKCAL"
+        style="@style/ranking_item"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/rankingMember"
+        android:layout_marginLeft="54dp"
+        android:text="@string/ranking_KCAL"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/rankingAverageBeat"
+        style="@style/ranking_item"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/rankingKCAL"
+        android:layout_marginLeft="54dp"
+        android:text="@string/ranking_average_beat"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/rankingAverageLap"
+        style="@style/ranking_item"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/rankingAverageBeat"
+        android:layout_marginLeft="60dp"
+        android:text="@string/ranking_average_lap"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+</android.support.constraint.ConstraintLayout>

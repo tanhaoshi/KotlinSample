@@ -75,10 +75,10 @@ public class GripProgressView extends View {
         float offset = (width - strokeWidth * 2) * mPower / 100.f;
 
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(getContext().getColor(R.color.grip_start));
+        paint.setColor(getContext().getResources().getColor(R.color.grip_start));
         LinearGradient linearGradient = new LinearGradient(strokeWidth_2, strokeWidth_2, offset, height - strokeWidth_2,
-                getContext().getColor(R.color.grip_start),
-                getContext().getColor(R.color.grip_end), Shader.TileMode.MIRROR);
+                getContext().getResources().getColor(R.color.grip_start),
+                getContext().getResources().getColor(R.color.grip_end), Shader.TileMode.MIRROR);
 
         paint.setShader(linearGradient);
 

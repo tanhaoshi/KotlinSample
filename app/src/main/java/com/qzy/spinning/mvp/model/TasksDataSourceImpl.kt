@@ -3,7 +3,15 @@ package com.qzy.spinning.mvp.model
 import com.qzy.spinning.R
 import com.qzy.spinning.mvp.datamodel.RankingData
 import com.qzy.spinning.mvp.datamodel.ScaleProgress
+import com.qzy.spinning.network.NetService
+import com.qzy.spinning.network.NetWorkUtils
+import com.qzy.spinning.util.Constant
+import com.qzy.spinning.util.HttpUtils
+import io.reactivex.functions.Consumer
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import java.util.*
+import kotlin.collections.HashMap
 import kotlin.random.Random
 
 class TasksDataSourceImpl private constructor() : TasksDataSource{
@@ -61,6 +69,22 @@ class TasksDataSourceImpl private constructor() : TasksDataSource{
         callback.onTasksLoaded(list)
     }
 
+    override fun getSmartCourseTask(hashMap: HashMap<String,RequestBody>,callback: TasksDataSource.LoadSmartCourseCallback) {
+        NetWorkUtils.getInstance().createService(NetService::class.java)
+                .getSmartCourseService(hashMap,Constant.SMART_COURSE_URL)
+                .compose(HttpUtils.transformSchedules())
+                .subscribe(object : Consumer<ResponseBody>{
+                    override fun accept(t: ResponseBody?) {
+                        callback.onSmartCourseTask(t!!)
+                    }
+
+                },object : Consumer<Throwable>{
+                    override fun accept(t: Throwable?) {
+                        callback.onDataNotAvailable(t!!)
+                    }
+                })
+    }
+
     companion object {
 
         private lateinit var INSTANCE:TasksDataSourceImpl
@@ -75,3 +99,4 @@ class TasksDataSourceImpl private constructor() : TasksDataSource{
         }
     }
 }
+

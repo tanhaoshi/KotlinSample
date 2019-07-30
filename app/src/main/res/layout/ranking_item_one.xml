@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="158dp"
+    android:layout_height="154dp">
+
+    <TextView
+        android:id="@+id/name_of_one"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="@color/white"
+        android:textSize="9sp"
+        android:text="雨晨念安"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"/>
+
+    <com.qzy.spinning.layout.CircleImageView
+        android:id="@+id/photo_of_one"
+        android:src="@drawable/a1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_of_one"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <ImageView
+        android:id="@+id/run_of_one"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/photo_of_one"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/running"
+        android:layout_width="12dp"
+        android:layout_height="16dp"/>
+
+    <TextView
+        android:id="@+id/run_value_one"
+        app:layout_constraintTop_toBottomOf="@+id/run_of_one"
+        android:layout_marginTop="2dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="18dp"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        android:text="5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/unit"
+        app:layout_constraintTop_toBottomOf="@+id/run_of_one"
+        android:layout_marginTop="2dp"
+        app:layout_constraintLeft_toRightOf="@+id/run_value_one"
+        android:textColor="@color/white"
+        android:textSize="7sp"
+        android:text="spm"
+        android:gravity="bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="14dp"/>
+
+    <ImageView
+        android:id="@+id/run_of_two"
+        app:layout_constraintLeft_toRightOf="@+id/run_of_one"
+        android:layout_marginLeft="25dp"
+        app:layout_constraintTop_toBottomOf="@+id/photo_of_one"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/consume"
+        android:layout_width="12dp"
+        android:layout_height="16dp"/>
+
+    <TextView
+        android:id="@+id/run_value_two"
+        app:layout_constraintTop_toBottomOf="@+id/run_of_one"
+        android:layout_marginTop="2dp"
+        app:layout_constraintLeft_toRightOf="@+id/unit"
+        android:layout_marginLeft="16dp"
+        android:textColor="@color/white"
+        android:text="96"
+        android:textSize="11sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/unit_two"
+        app:layout_constraintTop_toBottomOf="@+id/run_of_one"
+        android:layout_marginTop="2dp"
+        app:layout_constraintLeft_toRightOf="@+id/run_value_two"
+        android:textColor="@color/white"
+        android:textSize="7sp"
+        android:text="kcal"
+        android:gravity="bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="14dp"/>
+
+    <ImageView
+        android:id="@+id/run_of_three"
+        app:layout_constraintLeft_toRightOf="@+id/run_value_two"
+        android:layout_marginLeft="42dp"
+        app:layout_constraintTop_toBottomOf="@+id/photo_of_one"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/beat"
+        android:layout_width="12dp"
+        android:layout_height="16dp"/>
+
+    <TextView
+        android:id="@+id/run_value_three"
+        app:layout_constraintTop_toBottomOf="@+id/run_of_three"
+        android:layout_marginTop="2dp"
+        app:layout_constraintLeft_toRightOf="@+id/unit_two"
+        android:layout_marginLeft="27dp"
+        android:textColor="@color/white"
+        android:text="96"
+        android:textSize="11sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/unit_three"
+        app:layout_constraintTop_toBottomOf="@+id/run_of_three"
+        android:layout_marginTop="2dp"
+        app:layout_constraintLeft_toRightOf="@+id/run_value_three"
+        android:textColor="@color/white"
+        android:textSize="7sp"
+        android:text="bpm"
+        android:gravity="bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="14dp"/>
+
+</android.support.constraint.ConstraintLayout>

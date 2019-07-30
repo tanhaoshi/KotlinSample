@@ -4,34 +4,32 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import com.qzy.spinning.R
 import com.qzy.spinning.mvp.datamodel.CourseModel
+import com.qzy.spinning.mvp.model.Injection
+import com.qzy.spinning.mvp.presenter.SmartCoursePresenter
 import com.qzy.spinning.mvp.ui.adapter.SmartCourseAdapter
+import com.qzy.spinning.mvp.ui.fragment.PhysicalFragment
+import com.qzy.spinning.mvp.ui.fragment.SmartCourseFragment
+import com.qzy.spinning.util.replaceFragmentInActivity
+import com.qzy.spinning.util.toast
 import kotlinx.android.synthetic.main.activity_smart_course.*
 
 class SmartCourseActivity : AppCompatActivity() {
 
-    private lateinit var smartCourseAdapter: SmartCourseAdapter
-
-    private var list = ArrayList<CourseModel>()
+    private lateinit var smartCoursePresenter: SmartCoursePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_smart_course)
-        smartCourseAdapter = SmartCourseAdapter(list,this)
-        var recyclerView = courseSmartRc.also {
-            it.layoutManager = GridLayoutManager(this,6)
-        }
-        recyclerView.adapter = smartCourseAdapter
 
-        initData()
+        val smartCourseFragment = supportFragmentManager.findFragmentById(R.id.smart_fragment)
+                as SmartCourseFragment? ?: SmartCourseFragment.newInstance().also {
+            replaceFragmentInActivity(it,R.id.smart_fragment)
+        }
+
+        smartCoursePresenter = SmartCoursePresenter(Injection.provideTaskRepository(applicationContext),smartCourseFragment)
     }
 
-    private fun initData(){
-        for(item in 0..5){
-            list.add(CourseModel("初级减脂课",5,"19",
-                    "998",R.drawable.spinning,"568","30min",true))
-        }
-        smartCourseAdapter.list = list
-    }
 }

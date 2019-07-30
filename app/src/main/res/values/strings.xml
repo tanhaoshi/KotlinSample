@@ -47,5 +47,14 @@
     <string name="suitable_human">合适人群</string>
     <string name="taboo_human">禁忌人群</string>
 
+    <string name="ranking_character">排名</string>
+    <string name="ranking_photo">头像</string>
+    <string name="ranking_member">会员</string>
+    <string name="ranking_KCAL">卡路里</string>
+    <string name="ranking_average_beat">平均心率</string>
+    <string name="ranking_average_lap">平均踏频</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

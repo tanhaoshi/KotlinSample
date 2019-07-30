@@ -1,5 +1,7 @@
 package com.qzy.spinning.mvp.model
 
+import okhttp3.RequestBody
+
 
 class TaskRepository (val tasksDataSource: TasksDataSource) : TasksDataSource{
 
@@ -13,6 +15,10 @@ class TaskRepository (val tasksDataSource: TasksDataSource) : TasksDataSource{
 
     override fun getTasks(callback: TasksDataSource.LoadTasksCallback) {
         tasksDataSource.getTasks(callback)
+    }
+
+    override fun getSmartCourseTask(hashMap: HashMap<String,RequestBody>,callback: TasksDataSource.LoadSmartCourseCallback) {
+        tasksDataSource.getSmartCourseTask(hashMap,callback)
     }
 
     companion object {
