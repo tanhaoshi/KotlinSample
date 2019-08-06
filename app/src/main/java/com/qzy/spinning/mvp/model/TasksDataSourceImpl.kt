@@ -1,8 +1,7 @@
 package com.qzy.spinning.mvp.model
 
 import com.qzy.spinning.R
-import com.qzy.spinning.mvp.datamodel.RankingData
-import com.qzy.spinning.mvp.datamodel.ScaleProgress
+import com.qzy.spinning.mvp.datamodel.*
 import com.qzy.spinning.network.NetService
 import com.qzy.spinning.network.NetWorkUtils
 import com.qzy.spinning.util.Constant
@@ -73,16 +72,48 @@ class TasksDataSourceImpl private constructor() : TasksDataSource{
         NetWorkUtils.getInstance().createService(NetService::class.java)
                 .getSmartCourseService(hashMap,Constant.SMART_COURSE_URL)
                 .compose(HttpUtils.transformSchedules())
-                .subscribe(object : Consumer<ResponseBody>{
-                    override fun accept(t: ResponseBody?) {
-                        callback.onSmartCourseTask(t!!)
-                    }
+                .subscribe(Consumer<ResponseBody> { t -> callback.onSmartCourseTask(t!!) },
+                        Consumer<Throwable> { t -> callback.onDataNotAvailable(t!!) })
+    }
 
-                },object : Consumer<Throwable>{
-                    override fun accept(t: Throwable?) {
-                        callback.onDataNotAvailable(t!!)
-                    }
-                })
+    override fun getCourseTableTask(callback: TasksDataSource.LoadCourseTableCallback) {
+        NetWorkUtils.getInstance().createService(NetService::class.java)
+                .getCourseTableService(Constant.COURSE_TABLE_URL)
+                .compose(HttpUtils.transformSchedules())
+                .subscribe(Consumer<CourseTable> { t -> callback.onCourseTableTask(t!!) },
+                        Consumer<Throwable> { t -> callback.onDataNotAvailable(t!!) })
+    }
+
+    override fun getCourseExplainTask(hashMap: HashMap<String, RequestBody>, callback: TasksDataSource.LoadCourseExplainCallback) {
+        NetWorkUtils.getInstance().createService(NetService::class.java)
+                .getCourseExplainService(hashMap,Constant.COURSE_EXPLAIN_URL)
+                .compose(HttpUtils.transformSchedules())
+                .subscribe(Consumer<CourseExplain> { t -> callback.onCourseExplainTask(t!!) },
+                        Consumer<Throwable> { t -> callback.onDataNotAvailable(t!!) })
+    }
+
+    override fun getCourseDescriptionTask(hashMap: HashMap<String, RequestBody>, callback: TasksDataSource.LoadCourseDescriptionCallback) {
+        NetWorkUtils.getInstance().createService(NetService::class.java)
+                .getCourseExplainService(hashMap,Constant.COURSE_EXPLAIN_URL)
+                .compose(HttpUtils.transformSchedules())
+                .subscribe(Consumer<CourseExplain> { t -> callback.onCourseDescriptionTask(t!!) },
+                        Consumer<Throwable> { t -> callback.onDataNotAvailable(t!!) })
+    }
+
+    override fun getCourseTodayRankingTask(body:RequestBody, callback: TasksDataSource.LoadCourseTodayRankingCallback) {
+        NetWorkUtils.getInstance().createService(NetService::class.java)
+                .getCourseTodayRankingService(body,Constant.COURSE_RANKING_URL)
+                .compose(HttpUtils.transformSchedules())
+                .subscribe(Consumer<CourseTodayRanking>{t -> callback.onCourseTodayRankingTask(t!!)},
+                        Consumer<Throwable>{k -> callback.onDataNotAvailable(k!!)})
+    }
+
+    override fun submitCoursePhysicalTask(body: RequestBody, callback: TasksDataSource.SubmitCoursePhysicalCallback) {
+        NetWorkUtils.getInstance().createService(NetService::class.java)
+                .submitCourseFinishService(body,Constant.COURSE_PHYSICAL_URL)
+                .compose(HttpUtils.transformSchedules())
+                .subscribe(Consumer<ResponsePhysical> {t -> callback.onCoursePhysicalTask(t)},
+                        Consumer<Throwable> {t -> callback.onDataNotAvailable(t)})
     }
 
     companion object {

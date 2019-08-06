@@ -14,10 +14,18 @@ class PhysicalActivity : AppCompatActivity() {
 
     private lateinit var physicalPresenter: PhysicalContract.Presenter
 
+    lateinit var uuid : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_physical)
+
+        var intent = intent
+
+        var bundle = intent.getBundleExtra("bundle") as Bundle
+
+        this.uuid = bundle.getString("uuid")
 
         val physicalFragment = supportFragmentManager.findFragmentById(R.id.fragment_content)
             as PhysicalFragment? ?: PhysicalFragment.newInstance().also {

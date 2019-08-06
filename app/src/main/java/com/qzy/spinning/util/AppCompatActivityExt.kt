@@ -28,8 +28,9 @@ fun dp2px(context: Context,dpValue:Float): Int {
 }
 
 fun<T> startActivity(context: Context,clazz: Class<T>, bundle: Bundle?) {
-     var intent = Intent(SplashActivity@context,clazz)
+     var intent = Intent(context,clazz)
      if(bundle != null) intent.putExtra("bundle",bundle)
+     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
      context.startActivity(intent)
 }
 

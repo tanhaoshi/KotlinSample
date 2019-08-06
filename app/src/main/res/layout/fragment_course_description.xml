@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/title_layout"
+            layout="@layout/description_title_layout"
+            android:layout_width="327dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="84dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.bin.david.form.core.SmartTable
+            android:id="@+id/smartTable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="168dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/course_shape"
+            app:layout_constraintLeft_toRightOf="@+id/title_layout"
+            app:layout_constraintTop_toBottomOf="@+id/include"
+            />
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/course_include_layout"
+            android:layout_width="500dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="92dp"
+            android:layout_marginLeft="230dp"
+            app:layout_constraintLeft_toRightOf="@+id/title_layout"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <include
+            android:id="@+id/title_description"
+            layout="@layout/course_details_layout"
+            android:layout_width="420dp"
+            android:layout_height="760dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="146dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintLeft_toRightOf="@+id/smartTable"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include"
+            />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

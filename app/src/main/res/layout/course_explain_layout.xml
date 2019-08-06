@@ -10,22 +10,24 @@
         android:id="@+id/courseName"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="42dp"
         android:layout_marginLeft="23dp"
         android:text="动感单车中级燃脂课"
         android:textColor="@color/white"
-        android:textSize="23sp"
+        android:textSize="32sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <RelativeLayout
+        android:id="@+id/rlBuy"
         android:background="@drawable/shape_buy"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="42dp"
         app:layout_constraintLeft_toRightOf="@+id/courseName"
-        android:layout_marginLeft="23dp"
-        android:layout_width="110dp"
-        android:layout_height="31dp">
+        android:layout_marginLeft="30dp"
+        android:layout_width="125dp"
+        android:layout_height="46dp">
+
         <ImageView
             android:id="@+id/buyCar"
             android:layout_centerVertical="true"
@@ -40,9 +42,10 @@
             android:textColor="@color/white"
             android:layout_marginLeft="50dp"
             android:layout_centerVertical="true"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
     </RelativeLayout>
     
     <RelativeLayout
@@ -50,16 +53,20 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="73dp"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="23dp"
-        android:layout_width="193dp"
-        android:layout_height="180dp">
+        android:layout_marginTop="42dp"
+        android:layout_width="237dp"
+        android:layout_height="237dp">
+
         <ImageView
+            android:id="@+id/course_sample"
             android:src="@drawable/course_sample"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
         <ImageView
+            android:visibility="gone"
+            android:id="@+id/videoPlay"
             android:src="@drawable/video_play"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
@@ -72,36 +79,36 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="34dp"
         app:layout_constraintTop_toBottomOf="@+id/courseName"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="@string/degree_of_difficulty"
-        android:textSize="16sp"
+        android:textSize="22sp"
         android:textColor="@color/white"
-        android:layout_width="68dp"
-        android:layout_height="24dp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <com.qzy.spinning.layout.StarBarView
         android:id="@+id/star"
         app:layout_constraintLeft_toRightOf="@+id/degree_of_difficulty"
         android:layout_marginLeft="31dp"
         app:layout_constraintTop_toBottomOf="@+id/courseName"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="32dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         ratingbar:starEmpty="@drawable/star"
         ratingbar:starFill="@drawable/star"
-        ratingbar:starDistance="4dp"
+        ratingbar:starDistance="5dp"
         ratingbar:starSize="16dp"/>
     
     <TextView
         android:id="@+id/impose_favorable"
-        android:textSize="16sp"
+        android:textSize="22sp"
         android:text="@string/impose_favorable"
         android:textColor="@color/course_price_color"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="34dp"
         app:layout_constraintTop_toBottomOf="@+id/degree_of_difficulty"
-        android:layout_marginTop="15dp"
-        android:layout_width="68dp"
+        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <RelativeLayout
@@ -109,15 +116,15 @@
         app:layout_constraintLeft_toRightOf="@+id/impose_favorable"
         android:layout_marginLeft="28dp"
         app:layout_constraintTop_toBottomOf="@+id/degree_of_difficulty"
-        android:layout_marginTop="15dp"
-        android:layout_width="64dp"
-        android:layout_height="24dp">
+        android:layout_marginTop="26dp"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp">
 
         <TextView
             android:id="@+id/course_price"
             android:textColor="@color/course_price_color"
             android:text="¥"
-            android:textSize="12sp"
+            android:textSize="16sp"
             android:layout_marginLeft="6dp"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
@@ -126,7 +133,7 @@
         <TextView
             android:id="@+id/number"
             android:layout_toRightOf="@+id/course_price"
-            android:textSize="17sp"
+            android:textSize="23sp"
             android:layout_marginLeft="4dp"
             android:textColor="@color/course_price_color"
             android:text="19"
@@ -139,24 +146,24 @@
             android:id="@+id/past"
             android:text="/次"
             android:layout_centerVertical="true"
-            android:textSize="9sp"
+            android:textSize="15sp"
             android:gravity="bottom"
             android:layout_marginRight="8dp"
             android:textColor="@color/course_price_color"
             android:layout_toRightOf="@+id/number"
             android:layout_width="wrap_content"
-            android:layout_height="16dp"/>
+            android:layout_height="wrap_content"/>
     </RelativeLayout>
 
     <TextView
         android:id="@+id/initialPriceName"
         android:textColor="@color/white"
         android:text="@string/initial_price_name"
-        android:textSize="11sp"
+        android:textSize="17sp"
         app:layout_constraintLeft_toRightOf="@+id/favorable_price"
         android:layout_marginLeft="11dp"
         app:layout_constraintTop_toBottomOf="@+id/star"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="34dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -164,30 +171,32 @@
         android:id="@+id/initialPrice"
         android:textColor="@color/white"
         android:text="¥ 199"
-        android:textSize="11sp"
+        android:textSize="17sp"
         app:layout_constraintLeft_toRightOf="@+id/initialPriceName"
         android:layout_marginLeft="11dp"
         app:layout_constraintTop_toBottomOf="@+id/star"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="34dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/label"
         android:textColor="@color/white"
         android:text="@string/course_label"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="34dp"
         app:layout_constraintTop_toBottomOf="@+id/impose_favorable"
-        android:layout_marginTop="16dp"
-        android:textSize="16sp"
-        android:layout_width="68dp"
-        android:layout_height="24dp"/>
+        android:layout_marginTop="26dp"
+        android:textSize="22sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     
     <com.qzy.spinning.layout.FlowLayout
+        android:visibility="gone"
         android:id="@+id/flowLayout"
         app:layout_constraintTop_toBottomOf="@+id/impose_favorable"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintLeft_toRightOf="@+id/label"
         android:layout_marginLeft="28dp"
         android:layout_width="400dp"
@@ -199,12 +208,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="34dp"
         app:layout_constraintTop_toBottomOf="@+id/label"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="26dp"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="22sp"
         android:text="@string/course_duration"
-        android:layout_width="68dp"
-        android:layout_height="24dp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/duration"
@@ -212,20 +221,20 @@
         android:layout_marginLeft="28dp"
         app:layout_constraintTop_toBottomOf="@+id/flowLayout"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="22sp"
         android:text="40:00"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="27dp"
         android:layout_width="wrap_content"
-        android:layout_height="24dp"/>
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/course_consume"
         app:layout_constraintTop_toBottomOf="@+id/courseDuration"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="26dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="34dp"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="22sp"
         android:text="@string/course_consume"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -235,35 +244,35 @@
         app:layout_constraintLeft_toRightOf="@+id/course_consume"
         android:layout_marginLeft="34dp"
         app:layout_constraintTop_toBottomOf="@+id/duration"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:textColor="@color/white"
-        android:textSize="17sp"
+        android:textSize="22sp"
         android:text="66"
         android:gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="24dp"/>
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/unit"
         app:layout_constraintTop_toBottomOf="@+id/duration"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="36dp"
         app:layout_constraintLeft_toRightOf="@+id/consume"
         android:textColor="@color/white"
-        android:textSize="13sp"
+        android:textSize="12sp"
         android:text="千卡"
         android:gravity="bottom"
         android:layout_marginBottom="6dp"
         android:layout_width="wrap_content"
-        android:layout_height="23dp"/>
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/course_introduce"
         app:layout_constraintTop_toBottomOf="@+id/consume"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="26dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="34dp"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="22sp"
         android:text="@string/course_introduce"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -271,23 +280,24 @@
     <TextView
         android:id="@+id/course_introduce_content"
         app:layout_constraintTop_toBottomOf="@+id/unit"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="26dp"
         app:layout_constraintLeft_toRightOf="@+id/course_introduce"
         android:layout_marginLeft="28dp"
         android:textColor="@color/white"
-        android:textSize="13sp"
+        android:textSize="19sp"
         android:text="@string/course_introduce_content"
-        android:layout_width="677dp"
+        android:layout_width="wrap_content"
+        android:paddingRight="500dp"
         android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/suitable_human"
         app:layout_constraintTop_toBottomOf="@+id/course_introduce"
-        android:layout_marginTop="49dp"
+        android:layout_marginTop="59dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="34dp"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="22sp"
         android:text="@string/suitable_human"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -295,11 +305,11 @@
     <TextView
         android:id="@+id/suitableHuman"
         app:layout_constraintTop_toBottomOf="@+id/course_introduce"
-        android:layout_marginTop="49dp"
+        android:layout_marginTop="59dp"
         app:layout_constraintLeft_toRightOf="@+id/suitable_human"
         android:layout_marginLeft="28dp"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="22sp"
         android:text="15-40岁健身者"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -307,11 +317,11 @@
     <TextView
         android:id="@+id/taboo_human"
         app:layout_constraintTop_toBottomOf="@+id/suitable_human"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="26dp"
         android:layout_marginLeft="34dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="22sp"
         android:text="@string/taboo_human"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -321,9 +331,9 @@
         app:layout_constraintLeft_toRightOf="@+id/taboo_human"
         android:layout_marginLeft="28dp"
         app:layout_constraintTop_toBottomOf="@+id/suitable_human"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="26dp"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="22sp"
         android:text="患有骨质疏松或关节扭伤等疾病的人，不要轻易练习。"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

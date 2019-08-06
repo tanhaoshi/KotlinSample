@@ -24,6 +24,7 @@ class RankingAdapter : RecyclerView.Adapter<RankingAdapter.RankingViewHolder>{
 
     constructor(list: List<RankingData>? , context: Context){
         this.list    = list
+
         this.context = context
     }
 

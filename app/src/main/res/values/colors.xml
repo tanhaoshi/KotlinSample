@@ -46,4 +46,6 @@
     <color name="course_explain_bg">#1A1C20</color>
 
     <color name="course_price_color">#71B1FF</color>
+
+    <color name="downloder_finsh">#D4D2CC</color>
 </resources>

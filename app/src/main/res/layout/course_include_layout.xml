@@ -9,16 +9,17 @@
     <com.qzy.spinning.layout.StarBarView
         android:id="@+id/star"
         android:layout_gravity="bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         ratingbar:starEmpty="@drawable/star"
         ratingbar:starFill="@drawable/star"
         ratingbar:starDistance="5dp"
-        ratingbar:starSize="15dp"/>
+        ratingbar:starSize="20dp"/>
 
     <TextView
         android:text="@string/duration"
-        android:layout_marginLeft="18dp"
+        android:textSize="22sp"
+        android:layout_marginLeft="36dp"
         android:gravity="bottom|center_horizontal"
         android:textColor="@color/white"
         android:layout_width="wrap_content"
@@ -27,6 +28,7 @@
     <TextView
         android:id="@+id/duration"
         android:gravity="bottom"
+        android:textSize="22sp"
         android:textColor="@color/white"
         android:text="45:00"
         android:layout_marginLeft="12dp"
@@ -36,7 +38,8 @@
     <TextView
         android:text="@string/fat"
         android:gravity="bottom"
-        android:layout_marginLeft="18dp"
+        android:textSize="22sp"
+        android:layout_marginLeft="36dp"
         android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>
@@ -45,7 +48,8 @@
         android:id="@+id/fat"
         android:gravity="bottom"
         android:text="120Kcal"
-        android:layout_marginLeft="12dp"
+        android:textSize="22sp"
+        android:layout_marginLeft="36dp"
         android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>

@@ -1,6 +1,7 @@
 package com.qzy.spinning.mvp.ui.fragment
 
 import android.os.Bundle
+import android.os.Environment
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.qzy.spinning.util.WlanUtils
 import com.qzy.spinning.util.toast
 import kotlinx.android.synthetic.main.fragment_smart_course.*
 import kotlinx.android.synthetic.main.fragment_smart_course.view.*
+import java.io.File
 
 class SmartCourseFragment : Fragment() , SmartCourseContract.View,View.OnClickListener{
 
@@ -26,12 +28,16 @@ class SmartCourseFragment : Fragment() , SmartCourseContract.View,View.OnClickLi
 
     private var list = ArrayList<SmartCourse.DataBean>()
 
+    var basePath = Environment.getExternalStorageDirectory().absolutePath + File.separator + "spinningVideo"
+
     companion object {
         fun newInstance() = SmartCourseFragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_smart_course,container,false)
+
+        checkFile()
 
         smartCourseAdapter = SmartCourseAdapter(list,activity?.applicationContext!!)
 
@@ -51,12 +57,19 @@ class SmartCourseFragment : Fragment() , SmartCourseContract.View,View.OnClickLi
         startTransformValue("1","1")
     }
 
+    private fun checkFile(){
+        var file = File(basePath)
+        if(!file.exists()){
+            file.mkdirs()
+        }
+    }
+
     private fun startTransformValue(leagueType:String,flag:String){
         var map = HashMap<String,String>()
         var mac = WlanUtils.getMacAddress(SpinningApplication.getContext())
         map.put("page","1")
         map.put("limit","1")
-        map.put("boxMac","2000001")
+        map.put("boxNum","2000001")
         map.put("leagueType",leagueType)
         map.put("flag",flag)
         var hashmap = HttpUtils.generateRequestBody(map)

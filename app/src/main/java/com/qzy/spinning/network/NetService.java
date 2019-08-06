@@ -1,19 +1,15 @@
 package com.qzy.spinning.network;
 
 
-import com.qzy.spinning.mvp.datamodel.SmartCourse;
-
+import com.qzy.spinning.mvp.datamodel.CourseExplain;
+import com.qzy.spinning.mvp.datamodel.CourseTable;
+import com.qzy.spinning.mvp.datamodel.CourseTodayRanking;
+import com.qzy.spinning.mvp.datamodel.ResponsePhysical;
 import java.util.Map;
-
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PartMap;
@@ -32,76 +28,27 @@ public interface NetService {
             @Url String url
     );
 
-    @Headers({"Content-Type: application/json;charset=UTF-8"})
-    @GET("yyh_pro/services/WebserviceService/getUser?response=application/json")
-    Observable<ResponseBody> getQueryUser(
-    );
-
-    @Headers({"Content-Type: application/json;charset=UTF-8"})
     @POST
-    @FormUrlEncoded
-    Observable<ResponseBody> getSessionQueryUser(
-            @Body RequestBody requestBody,
-            @Url String url,
-            @Field("request") String account
+    Observable<CourseTable> getCourseTableService(
+            @Url String url
     );
 
-    @GET("api/AmountStates/GetAmountStates")
-    Observable<ResponseBody> firstAmountGet(
-            @Header("Authorization") String lang
+    @Multipart
+    @POST
+    Observable<CourseExplain> getCourseExplainService(
+            @PartMap Map<String,RequestBody> requestBodyMap,
+            @Url String url
     );
 
-    @GET("api/RptInfo/GetRptByCode?code=ContactDelivery")
-    Observable<ResponseBody> firstWebViewUrl(
-            @Header("Authorization") String lang
+    @POST
+    Observable<CourseTodayRanking> getCourseTodayRankingService(
+            @Body RequestBody body,
+            @Url String url
     );
 
-    //GetCategoriesByCode
-//    @GET("api/RptCategory/GetCategoriesByCode")
-//    Observable<List<RptCategory>> executeStrGet(
-//            @Header("Authorization") String lang
-//    );
-
-    @GET
-    Observable<ResponseBody> executeGetData(
-            @Url String url,
-            @Header("Authorization") String lang
-    );
-
-    @GET
-    Observable<ResponseBody> customziedCode(
-            @Url String url,
-            @Header("Authorization") String lang
-    );
-
-    //完全转为 支持各种类型
-//    @GET
-//    Observable<List<RptInfo>> executePostFrom(
-//            @Url String url,
-//            @Header("Authorization") String lang
-//    );
-
-//    @POST
-//    @FormUrlEncoded
-//    Observable<HResult> executeLogin(
-//            @Url String url,
-//            @FieldMap Map<String, String> map
-//    );
-
-//    @POST
-//    @FormUrlEncoded
-//    Observable<HResult> postLogin(
-//            @Url String url,
-//            @Field("account") String account,
-//            @Field("pwd") String password,
-//            @Field("mobileSerialNo") String serialNo
-//    );
-
-//    @POST("ship/saveManUserId")
-//    Observable<ResponseBody> addMember(@Body Test str);
-
-    //http://47.106.33.137:9097/TinTong/web/versionrecord/getNewestVersion
-    @POST("versionrecord/getNewestVersion")
-    io.reactivex.Observable<ResponseBody> getAppVersion(
+    @POST
+    Observable<ResponsePhysical> submitCourseFinishService(
+            @Body RequestBody body,
+            @Url String url
     );
 }

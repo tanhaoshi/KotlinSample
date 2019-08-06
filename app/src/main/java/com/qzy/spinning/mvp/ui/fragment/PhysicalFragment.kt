@@ -9,16 +9,32 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import com.alibaba.fastjson.JSON
 import com.qzy.spinning.R
+import com.qzy.spinning.eventbus.MessageEventbus
+import com.qzy.spinning.eventbus.User
 import com.qzy.spinning.layout.GripProgressView
 import com.qzy.spinning.mvp.contract.PhysicalContract
-import com.qzy.spinning.mvp.datamodel.RankingData
-import com.qzy.spinning.mvp.datamodel.ScaleProgress
+import com.qzy.spinning.mvp.datamodel.*
+import com.qzy.spinning.mvp.model.YunkangBoxManager
+import com.qzy.spinning.mvp.ui.activity.CourseDescriptionActivity
+import com.qzy.spinning.mvp.ui.activity.PhysicalActivity
+import com.qzy.spinning.mvp.ui.activity.TodayRankingActivity
 import com.qzy.spinning.mvp.ui.adapter.PhysicalAdapter
 import com.qzy.spinning.mvp.ui.adapter.RankingAdapter
+import com.qzy.spinning.util.Constant
+import com.qzy.spinning.util.HttpUtils
+import com.qzy.spinning.util.L
+import com.qzy.spinning.util.startActivity
 import kotlinx.android.synthetic.main.fragment_physical.*
+import okhttp3.RequestBody
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class PhysicalFragment : Fragment() , PhysicalContract.View{
 
@@ -32,23 +48,67 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
 
     private lateinit var list: List<ScaleProgress>
 
-    companion object {
+    lateinit var uuid : String
 
+    companion object {
         fun newInstance() = PhysicalFragment()
     }
 
     override fun onResume() {
         super.onResume()
+        initialize()
         presenter.start()
+    }
+
+    private fun initialize(){
+        var hashMap = HashMap<String,String>()
+        hashMap.put("leagueUuid","d0fcd25da7374e188fe3908a982c5a9e")
+        var requestMap = HttpUtils.generateRequestBody(hashMap)
+        presenter.getPhysicalProgressTask(requestMap)
+    }
+
+    override fun showPhysicalProgressTask(courseExplain: CourseExplain) {
+        var hashmap = courseExplain.data.classLeague.stageGroup
+        var list = LinkedList<TableModel>()
+        var time = 0
+        for(tableList:List<TableModel> in hashmap.values){
+            for(listValue in tableList){
+                time += listValue.duration.toInt()
+                L.i("look over at time value = " + time)
+                list.add(listValue)
+            }
+        }
+
+        L.i("look over durations = " + courseExplain.data.classLeague.duration)
+
+        L.i("look over times = " + time)
     }
 
     override fun onStart() {
         super.onStart()
+        EventBus.getDefault().register(this)
         presenter.getRankingTasks()
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(messageEventbus: MessageEventbus) {
+        when(messageEventbus.type){
+            Constant.BOX_USER_ONLINE ->
+            Constant.BOX_USER_ICON
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_physical,container,false)
+
+        var physicalActivity = activity as PhysicalActivity
+
+        this.uuid = physicalActivity.uuid
 
         with(root){
             var recyclerView = findViewById<RecyclerView>(R.id.recyclerView).also {
@@ -68,8 +128,11 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
             var gripProgress = findViewById<GripProgressView>(R.id.gripProgress).also {
                 it.power = 40
             }
-        }
 
+            findViewById<TextView>(R.id.finish_course).setOnClickListener {
+                sumitPhysicalData()
+            }
+        }
         return root
     }
 
@@ -119,7 +182,7 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
                     return
                 }
 
-                if(dateTime <= (list.get(nextPosition).second) * 1000){
+                if(dateTime <= (list[nextPosition].second) * 1000){
                     progressBar.postDelayInvalidate(nextPosition)
                     dateTime += 2000
                 }else{
@@ -132,8 +195,44 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
 
     @SuppressLint("ResourceType")
     private inline fun transform(position: Int, second: Long, @ColorInt color:Int){
-        list.get(position).second = second
-        list.get(position).signalColor = resources.getColor(color)
+        list[position].second = second
+        list[position].signalColor = resources.getColor(color)
+    }
+
+    private inline fun sumitPhysicalData(){
+        var submitPhsical = SubmitPhsical()
+        submitPhsical.gymAddr  = "00000142"
+        submitPhsical.duration = 120
+        submitPhsical.mac      = "sss"
+        submitPhsical.winner   = "red"
+        var list = ArrayList<SubmitPhsical.ListBean>()
+        var listBean = SubmitPhsical.ListBean()
+        listBean.leagueUuid = "cafa399310c24b7786e01145f0eeb1"
+        listBean.openId     = "asss"
+        listBean.mileage    = "100"
+        listBean.consume    = "556"
+        listBean.maxFrequency = "50"
+        listBean.avgFrequency = "40"
+        listBean.avgSpeed    = "1"
+        listBean.duration = "100"
+        listBean.maxRate = "140"
+        listBean.intensity = "80"
+        listBean.heartRange = "9"
+        listBean.avgRate = "80"
+        listBean.color = "red"
+        list.add(listBean)
+        submitPhsical.list = list
+        var content = JSON.toJSONString(submitPhsical)
+        val body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), content)
+        presenter.submitPhysicalTask(body)
+    }
+
+    override fun showPhysicalFinishTask(responsePhysical: ResponsePhysical) {
+        if(responsePhysical.code == 200) startActivity(activity?.applicationContext!!,TodayRankingActivity::class.java,null)
+    }
+
+    override fun showFailed(throwable: Throwable) {
+
     }
 
     override fun onDestroy() {
