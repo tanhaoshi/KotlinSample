@@ -86,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <com.qzy.spinning.layout.StarBarView
+    <cbox.yunkang.com.c_box.layout.StarBarView
         android:id="@+id/star"
         app:layout_constraintLeft_toRightOf="@+id/degree_of_difficulty"
         android:layout_marginLeft="31dp"
@@ -192,7 +192,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     
-    <com.qzy.spinning.layout.FlowLayout
+    <cbox.yunkang.com.c_box.layout.FlowLayout
         android:visibility="gone"
         android:id="@+id/flowLayout"
         app:layout_constraintTop_toBottomOf="@+id/impose_favorable"
@@ -201,7 +201,7 @@
         android:layout_marginLeft="28dp"
         android:layout_width="400dp"
         android:layout_height="25dp">
-    </com.qzy.spinning.layout.FlowLayout>
+    </cbox.yunkang.com.c_box.layout.FlowLayout>
 
     <TextView
         android:id="@+id/courseDuration"

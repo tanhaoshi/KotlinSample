@@ -56,6 +56,10 @@
 
     <string name="finish_course">结束课程</string>
 
+    <string name="exits_course">是否确定退出课程</string>
+    <string name="cancel_exits">取消</string>
+    <string name="yes_exits">确定</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

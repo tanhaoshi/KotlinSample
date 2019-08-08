@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <com.qzy.spinning.layout.GripProgressView
+            <cbox.yunkang.com.c_box.layout.GripProgressView
                 android:id="@+id/gripProgress"
                 android:layout_gravity="center"
                 app:batteryColor="@color/ranking_grip_bg"
@@ -112,13 +112,14 @@
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/target_heart"
         app:layout_constraintTop_toBottomOf="@+id/target_frequency"
         android:layout_marginTop="48dp"
         app:layout_constraintLeft_toRightOf="@+id/target_heartRate"
         android:background="@color/ranking_heart_rate"
         android:layout_marginLeft="8dp"
         android:layout_width="112dp"
-        android:layout_height="18dp"
+        android:layout_height="24dp"
         android:textAlignment="center"
         android:text="脂肪燃烧：70%-80%"
         android:textColor="@color/white"

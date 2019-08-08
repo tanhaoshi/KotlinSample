@@ -27,7 +27,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"/>
 
-    <com.qzy.spinning.layout.CircleImageView
+    <cbox.yunkang.com.c_box.layout.CircleImageView
         android:id="@+id/ranking_photo"
         android:layout_marginLeft="42dp"
         android:layout_gravity="center"

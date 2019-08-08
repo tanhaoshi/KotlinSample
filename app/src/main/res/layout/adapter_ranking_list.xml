@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>
 
-    <com.qzy.spinning.layout.CircleImageView
+    <cbox.yunkang.com.c_box.layout.CircleImageView
         android:id="@+id/rankingPhoto"
         android:scaleType="centerCrop"
         app:layout_constraintLeft_toRightOf="@+id/rankingSort"

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:focusable="true"
+              android:focusableInTouchMode="true"
+              android:layout_width="286dp"
+              android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:background="@color/gradientStartColor"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/title"
+            android:textSize="13sp"
+            android:text=""
+            android:textColor="@color/black"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/custom_input"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="29dp"
+            android:layout_width="233dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/exits_course"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:paddingLeft="6dp"
+            android:textColor="@color/white"
+            android:layout_height="94dp"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/line_dimens"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:background="@color/gradientStartColor"
+            android:id="@+id/custom_cannel"
+            android:layout_weight="1"
+            android:textSize="15sp"
+            android:text="@string/cancel_exits"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_height="42dp"/>
+
+        <TextView
+            android:background="@color/line_bg"
+            android:layout_width="0.8dp"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/custom_yes"
+            android:layout_weight="1"
+            android:textSize="15sp"
+            android:textColor="@color/gradientStartColor"
+            android:gravity="center"
+            android:text="@string/yes_exits"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/line_dimens"/>
+
+</LinearLayout>

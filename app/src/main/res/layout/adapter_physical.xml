@@ -4,15 +4,15 @@
     android:layout_width="85dp"
     android:layout_height="wrap_content">
 
-    <com.qzy.spinning.layout.RoundRectView
+    <cbox.yunkang.com.c_box.layout.RoundRectView
         android:id="@+id/roundRect"
         android:layout_centerHorizontal="true"
         android:layout_width="match_parent"
         android:layout_height="130dp"
         >
-    </com.qzy.spinning.layout.RoundRectView>
+    </cbox.yunkang.com.c_box.layout.RoundRectView>
 
-    <com.qzy.spinning.layout.CircleImageView
+    <cbox.yunkang.com.c_box.layout.CircleImageView
         android:id="@+id/cirImg"
         android:layout_below="@+id/roundRect"
         android:layout_centerHorizontal="true"

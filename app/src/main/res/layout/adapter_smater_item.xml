@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <com.qzy.spinning.layout.StarBarView
+        <cbox.yunkang.com.c_box.layout.StarBarView
             android:id="@+id/star"
             android:layout_centerVertical="true"
             android:layout_width="100dp"
@@ -80,7 +80,7 @@
             android:id="@+id/past_line"
             android:layout_toRightOf="@+id/number"
             android:layout_centerVertical="true"
-            android:background="@color/redColor"
+            android:background="@color/grip_end"
             android:layout_marginLeft="12dp"
             android:layout_width="55dp"
             android:layout_height="0.8dp"/>

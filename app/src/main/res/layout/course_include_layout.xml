@@ -6,7 +6,7 @@
     android:layout_width="wrap_content"
     android:layout_height="42dp">
 
-    <com.qzy.spinning.layout.StarBarView
+    <cbox.yunkang.com.c_box.layout.StarBarView
         android:id="@+id/star"
         android:layout_gravity="bottom"
         android:layout_width="100dp"

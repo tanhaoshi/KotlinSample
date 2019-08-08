@@ -11,12 +11,6 @@
 
     <color name="grayColor">#FF8C8585</color>
 
-    <color name="redColor">#FFE84242</color>
-    <color name="yellowColor">#FFE8C442</color>
-    <color name="greenColor">#FF74E842</color>
-    <color name="blueColor">#FF42BFE8</color>
-    <color name="violetColor">#FFB942E8</color>
-
     <color name="gradientStartColor">#175EB5</color>
     <color name="gradientEndColor">#053D80</color>
 
@@ -48,4 +42,17 @@
     <color name="course_price_color">#71B1FF</color>
 
     <color name="downloder_finsh">#D4D2CC</color>
+    <!-- 休闲热身 -->
+    <color name ="relaxationColor">#A3AEBE</color>
+    <!-- 脂肪燃烧 -->
+    <color name ="fatColor">#1F59F7</color>
+    <!-- 心肺提升 -->
+    <color name="heartLungColor">#29C96E</color>
+    <!-- 乳酸阀值 -->
+    <color name="lacticColor">#FC8900</color>
+    <!-- 极限训练 -->
+    <color name="limitationColor">#FA1F00</color>
+
+    <color name="line_bg">#e5e5e5</color>
+
 </resources>

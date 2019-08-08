@@ -9,6 +9,7 @@
     <!-- 辅助器械 -->
 
     <TextView
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/grip_text"
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/grip_img"
         android:text="杠铃"
         android:textColor="@color/white"
@@ -31,8 +33,6 @@
         android:layout_marginLeft="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-
-    <!-- 适合人群 -->
 
     <TextView
         android:id="@+id/progress_text"
