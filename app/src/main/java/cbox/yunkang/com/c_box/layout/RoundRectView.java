@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -22,7 +23,7 @@ public class RoundRectView extends View {
     private static final int DEFAULT_HEIGHT = 100;
 
     /** The fixed number */
-    private static final int DEFAULT_NUMBER = 11;
+    private static final int DEFAULT_NUMBER = 10;
 
     private int width;
     private int height;
@@ -133,7 +134,7 @@ public class RoundRectView extends View {
         innerPaint.setStyle(style);
         innerPaint.setColor(getContext().getResources().getColor(R.color.transparent));
 
-        float signal = height / 11;
+        float signal = height / 10;
         float fixedHeight = signal / 3;
         float rectHeight = 0;
         float specHeight = signal;
@@ -151,7 +152,7 @@ public class RoundRectView extends View {
         innerPaint.setStyle(style);
         innerPaint.setColor(fillColor);
 
-        float signal = height / 11;
+        float signal = height / 10;
         float fixedHeight = signal/3;
         float rectHeight = signal * (DEFAULT_NUMBER - number) ;
         float specHeight = signal * (DEFAULT_NUMBER - number + 1);
@@ -165,10 +166,10 @@ public class RoundRectView extends View {
         }
     }
 
-    public void postInvalidate(int number){
+    public void postInvalidate(int number, @ColorInt int fillColor){
         this.number = number;
         postInvalidate();
-        fillColor = getRandColor();
+        this.fillColor = fillColor;
     }
 
     private int getRandColor(){

@@ -2,16 +2,19 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="700dp"
-    android:layout_height="39dp">
+    android:layout_width="wrap_content"
+    android:layout_height="64dp">
 
     <TextView
         android:id="@+id/rankingSort"
-        style="@style/ranking_item"
+        android:textSize="22sp"
+        android:textColor="@color/white"
+        android:gravity="center_vertical"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:text="@string/ranking_character"
-        android:layout_marginLeft="0dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="6dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>
 
@@ -22,9 +25,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="@string/ranking_photo"
-        android:layout_marginLeft="63dp"
-        android:layout_width="22dp"
-        android:layout_height="18dp"/>
+        android:layout_marginLeft="158dp"
+        android:layout_width="42dp"
+        android:layout_height="32dp"/>
 
     <TextView
         android:id="@+id/rankingMember"
@@ -32,7 +35,7 @@
         app:layout_constraintLeft_toRightOf="@+id/rankingPhoto"
         app:layout_constraintTop_toTopOf="parent"
         android:text="@string/ranking_member"
-        android:layout_marginLeft="59dp"
+        android:layout_marginLeft="128dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>
 
@@ -41,7 +44,7 @@
         style="@style/ranking_item"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/rankingMember"
-        android:layout_marginLeft="54dp"
+        android:layout_marginLeft="128dp"
         android:text="@string/ranking_KCAL"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>
@@ -51,7 +54,7 @@
         style="@style/ranking_item"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/rankingKCAL"
-        android:layout_marginLeft="54dp"
+        android:layout_marginLeft="150dp"
         android:text="@string/ranking_average_beat"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>
@@ -61,7 +64,7 @@
         style="@style/ranking_item"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/rankingAverageBeat"
-        android:layout_marginLeft="60dp"
+        android:layout_marginLeft="160dp"
         android:text="@string/ranking_average_lap"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>

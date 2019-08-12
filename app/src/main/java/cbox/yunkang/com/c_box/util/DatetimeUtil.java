@@ -1,5 +1,8 @@
 package cbox.yunkang.com.c_box.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class DatetimeUtil {
 
     public static String timeParse(long duration) {
@@ -22,7 +25,11 @@ public class DatetimeUtil {
         int hour = 0;
         int minute = 0;
         int second = 0;
-        second = l.intValue() ;
+
+        second = l.intValue();
+
+        String secondContent = "";
+
         if (second > 60) {
             minute = second / 60;         //取整
             second = second % 60;         //取余
@@ -32,8 +39,27 @@ public class DatetimeUtil {
             hour = minute / 60;
             minute = minute % 60;
         }
-        String strtime = hour+":"+minute+":"+second;
+
+        if(second < 10){
+            secondContent = "0"+second;
+        }else{
+            secondContent = ""+second;
+        }
+
+        String strtime = hour+":"+minute+":"+secondContent;
         return strtime;
 
     }
+
+    public static int Date2ms(String date){
+        if(date.length() > 3){
+            String[] time = date.split(":");
+            int min = Integer.valueOf(time[0]) * 60;
+            int seconds = Integer.valueOf(time[1]);
+            return min + seconds;
+        }else{
+            return Integer.valueOf(date);
+        }
+    }
+
 }

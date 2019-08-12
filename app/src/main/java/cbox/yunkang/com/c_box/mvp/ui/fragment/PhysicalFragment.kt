@@ -1,6 +1,7 @@
 package cbox.yunkang.com.c_box.mvp.ui.fragment
 
 import android.annotation.SuppressLint
+import android.app.ActionBar
 import android.app.Dialog
 import android.os.Bundle
 import android.os.Environment
@@ -10,16 +11,16 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.*
 import android.widget.MediaController
 import android.widget.TextView
 import cbox.yunkang.com.c_box.R
+import cbox.yunkang.com.c_box.R.id.*
 import cbox.yunkang.com.c_box.eventbus.MessageEventbus
 import cbox.yunkang.com.c_box.eventbus.User
 import cbox.yunkang.com.c_box.mvp.contract.PhysicalContract
-import cbox.yunkang.com.c_box.mvp.datamodel.CourseExplain
-import cbox.yunkang.com.c_box.mvp.datamodel.ScaleProgress
-import cbox.yunkang.com.c_box.mvp.datamodel.SubmitPhsical
+import cbox.yunkang.com.c_box.mvp.datamodel.*
 import cbox.yunkang.com.c_box.mvp.model.YunkangBoxManager
 import cbox.yunkang.com.c_box.mvp.ui.activity.PhysicalActivity
 import cbox.yunkang.com.c_box.mvp.ui.activity.TodayRankingActivity
@@ -36,6 +37,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 import cbox.yunkang.com.c_box.util.DatetimeUtil.formatLongToTimeStr
+import com.ykcx.bcore.cil.BoxCore
 import com.ykcx.bcore.utils.BasePreference
 import kotlinx.android.synthetic.main.ranking_adjust_layout.*
 import kotlinx.android.synthetic.main.ranking_detail_layout.*
@@ -55,15 +57,20 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
 
     private lateinit var timer : Timer
 
+    fun isTimerinitialize() = ::timer.isInitialized
+
     lateinit var uuid : String
 
     private var handler  : Handler? = Handler()
 
     private val refreshRunnable : Runnable = object :Runnable{
         override fun run() {
-            time --
 
-            val formatLongToTimeStr = formatLongToTimeStr(time.toLong())
+            if(signalTime > 0){
+                signalTime --
+            }
+
+            val formatLongToTimeStr = formatLongToTimeStr(signalTime.toLong())
             val split = formatLongToTimeStr.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
             physical_schedule.text = split[1] +":"+ split[2]
 
@@ -80,7 +87,6 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
     override fun onResume() {
         super.onResume()
         initialize()
-//        presenter.start()
     }
 
     private fun initialize(){
@@ -92,39 +98,45 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
 
     var time = 0
 
-    var progressList = ArrayList<cbox.yunkang.com.c_box.mvp.datamodel.ScaleProgress>()
+    var signalTime = 0
 
-    var modelList = LinkedList<cbox.yunkang.com.c_box.mvp.datamodel.TableModel>()
+    var progressList = ArrayList<ScaleProgress>()
+
+    var modelList = LinkedList<TableModel>()
 
     @SuppressLint("ResourceAsColor")
     override fun showPhysicalProgressTask(courseExplain: CourseExplain) {
+
         var hashmap = courseExplain.data.classLeague.stageGroup
 
-        for(tableList:List<cbox.yunkang.com.c_box.mvp.datamodel.TableModel> in hashmap.values){
+        for(tableList:List<TableModel> in hashmap.values){
             for(listValue in tableList){
-                time += listValue.duration.toInt()
+                time += DatetimeUtil.Date2ms(listValue.duration)
                 modelList.add(listValue)
             }
         }
 
+        signalTime = DatetimeUtil.Date2ms(modelList[0].duration)
+
         initializeView(modelList[0],0)
 
         for(tableModel in modelList){
-            var scaleWidth : Double = (tableModel.duration.toDouble() / time)
 
-            var scaleTop  :Double = (tableModel.stepFrequency.toDouble() / 10)
+            var scaleWidth : Double = (DatetimeUtil.Date2ms(tableModel.duration).toDouble() / time)
 
-            var scaleProgress = ScaleProgress(scaleTop,scaleWidth,5,tableModel.duration.toLong())
+            var scaleTop  :Double = (DatetimeUtil.Date2ms(tableModel.stepFrequency.toString()).toDouble() / 200)
 
-            if(tableModel.heartRange == 1){
+            var scaleProgress = ScaleProgress(scaleTop,scaleWidth,5,DatetimeUtil.Date2ms(tableModel.duration).toLong())
+
+            if(tableModel.heartRange == 0){
                 scaleProgress.signalColor = resources.getColor(R.color.relaxationColor)
-            }else if(tableModel.heartRange == 2){
+            }else if(tableModel.heartRange == 1){
                 scaleProgress.signalColor = resources.getColor(R.color.fatColor)
-            }else if(tableModel.heartRange == 3){
+            }else if(tableModel.heartRange == 2){
                 scaleProgress.signalColor = resources.getColor(R.color.heartLungColor)
-            }else if(tableModel.heartRange == 4){
+            }else if(tableModel.heartRange == 3){
                 scaleProgress.signalColor = resources.getColor(R.color.lacticColor)
-            }else if(tableModel.heartRange == 5){
+            }else if(tableModel.heartRange == 4){
                 scaleProgress.signalColor = resources.getColor(R.color.limitationColor)
             }
 
@@ -132,7 +144,7 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
 
         }
 
-        val formatLongToTimeStr = formatLongToTimeStr(time.toLong())
+        val formatLongToTimeStr = formatLongToTimeStr(signalTime.toLong())
         val split = formatLongToTimeStr.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
         physical_schedule.text = split[1] +":"+ split[2]
 
@@ -146,7 +158,6 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
     override fun onStart() {
         super.onStart()
         EventBus.getDefault().register(this)
-//        presenter.getRankingTasks()
         playVideo()
     }
 
@@ -163,26 +174,34 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(messageEventbus: MessageEventbus) {
         when(messageEventbus.type){
-            Constant.BOX_USER_ICON -> postNotifyChangeAdapter(messageEventbus.`object` as List<cbox.yunkang.com.c_box.eventbus.User>)
+            Constant.BOX_USER_ICON -> changeNotifyData(messageEventbus.`object` as List<User>)
+            Constant.BOX_USER_REFRESH ->changeNotifyData(messageEventbus.`object` as List<User>)
+            Constant.BOX_USER_ALLOFFLINE ->changeNotifyData(messageEventbus.`object` as List<User>)
+            Constant.BOX_USER_OFFLINE -> changeNotifyData(messageEventbus.`object` as List<User>)
+            Constant.BOX_USER_SWITCHEP -> changeNotifyData(messageEventbus.`object` as List<User>)
         }
     }
 
-    private inline fun postNotifyChangeAdapter(list: List<User>){
+    private fun changeNotifyData(list:List<User>){
+        this.userList.clear()
+        this.userList.addAll(list)
 
-        L.i("physical manager process = " + list.size)
-
-        this.userList = list as ArrayList<User>
-
+        if(list.size == 0) {
+            physicalAdapter.list = list
+            rankingAdapter.list = list
+            return
+        }
         physicalAdapter.list = list
 
         Collections.sort(list,Collections.reverseOrder())
 
         if(list.size > 10){
             list.subList(0,10)
-            physicalAdapter.list = list
+            rankingAdapter.list = list
         }else{
             rankingAdapter.list = list
         }
+
     }
 
     override fun onStop() {
@@ -217,7 +236,6 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
             }
 
             findViewById<TextView>(R.id.finish_course).setOnClickListener {
-//                sumitPhysicalData()
                 initDialog()
             }
         }
@@ -227,7 +245,7 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
     override fun showTasks(list: List<Int>) {
     }
 
-    override fun showProgressTasks(list: List<cbox.yunkang.com.c_box.mvp.datamodel.ScaleProgress>) {
+    override fun showProgressTasks(list: List<ScaleProgress>) {
     }
 
     @SuppressLint("ResourceAsColor")
@@ -248,30 +266,67 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
                     progressBar.postDelayInvalidate(nextPosition)
                     dateTime += 2000
                 } else {
-                    if ((nextPosition + 1) == modelList.size) return
-                    initializeView(modelList[nextPosition], nextPosition)
-                    dateTime = 0
-                    nextPosition += 1
-                }
+                    if(modelList.size == 1){
+                        timer.cancel()
+                        return
+                    }
 
-                YunkangBoxManager.getInstance().showUserIcon(null)
+                    nextPosition += 1
+                    dateTime = 0
+
+                    if(nextPosition == modelList.size){
+                        signalTime = 0
+                    }else{
+                        signalTime = DatetimeUtil.Date2ms(modelList[nextPosition].duration)
+                    }
+                    if(nextPosition != modelList.size){
+                        initializeView(modelList[nextPosition], nextPosition)
+                    }else{
+                        BoxCore.getInstance().notifyAllUserOffline()
+                        sumitPhysicalData()
+                        startActivity(activity?.applicationContext!!, TodayRankingActivity::class.java,null)
+                        activity!!.finish()
+                    }
+                }
             }
         },0,2000)
     }
 
-    private inline fun initializeView(tableModel : cbox.yunkang.com.c_box.mvp.datamodel.TableModel, nextPosition:Int){
+    private inline fun initializeView(tableModel : TableModel, nextPosition:Int){
         activity?.runOnUiThread {
             gripProgress.power = tableModel.resistance
+            percent.text = tableModel.resistance.toString() + "%"
             target_count.text = tableModel.stepFrequency.toString() + "分/次"
-            target_heart.text = "脂肪燃烧:"+tableModel.heartRange.toString()
+            if(tableModel.heartRange == 0){
+                target_heart.text = "休闲热身:(40%-60%)"
+            }else if(tableModel.heartRange == 1){
+                target_heart.text = "脂肪燃烧:(60%-70%)"
+            }else if(tableModel.heartRange == 2){
+                target_heart.text = "心肺提升:(70%-80%)"
+            }else if(tableModel.heartRange == 3){
+                target_heart.text = "乳酸阈值:(80%-90%)"
+            }else if(tableModel.heartRange == 4){
+                target_heart.text = "极限训练:(90%-100%)"
+            }
             target_action_step.text = tableModel.essential
             title.text = tableModel.title
-            nextAction.text = "Next："+modelList.get(nextPosition+1).title
+            if(modelList.size == 1){
+                nextAction.text = "Next："+ "无"
+            }else{
+                if((modelList.size - nextPosition) == 1){
+                    nextAction.text = "Next："+ "无"
+                }else{
+                    if(modelList.size == nextPosition){
+                        nextAction.text = "Next："+"无"
+                    }else{
+                        nextAction.text = "Next："+modelList.get(nextPosition+1).title
+                    }
+                }
+            }
         }
     }
 
-    override fun showRankingTasks(list: List<cbox.yunkang.com.c_box.mvp.datamodel.RankingData>) {
-//        rankingAdapter.list = list
+    override fun showRankingTasks(list: List<RankingData>) {
     }
 
     var userList = ArrayList<User>()
@@ -285,18 +340,17 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
         var list = ArrayList<SubmitPhsical.ListBean>()
         for (value in userList){
             var listBean = SubmitPhsical.ListBean()
-            listBean.leagueUuid = "cafa399310c24b7786e01145f0eeb1"
+            listBean.leagueUuid = randomUUID()
             listBean.openId     = value.usrOpenId
-            listBean.mileage    = "100"
-            listBean.consume    = "556"
-            listBean.maxFrequency = "50"
-            listBean.avgFrequency = "40"
-            listBean.avgSpeed    = "1"
-            listBean.duration = "100"
-            listBean.maxRate = "140"
-            listBean.intensity = "80"
-            listBean.heartRange = "9"
-            listBean.avgRate = "80"
+            listBean.mileage    = value.sportTotalValue
+            listBean.consume    = value.kcal.toString()
+            listBean.maxFrequency = YunkangBoxManager.getInstance().maxFrequency.toString()
+            listBean.avgSpeed    = value.speedValue
+            listBean.duration = (value.restartTime - value.onLineTime).toString()
+            listBean.maxRate = YunkangBoxManager.getInstance().maxRate.toString()
+            listBean.intensity = value.trainStrength
+            listBean.heartRange = value.heartRateValue.toString()
+            listBean.avgRate =  value.heartRateValue.toString()
             listBean.color = "red"
             list.add(listBean)
         }
@@ -306,17 +360,29 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
         presenter.submitPhysicalTask(body)
     }
 
+    private fun randomUUID() : String{
+        var uuid = UUID.randomUUID()
+        var randomUUID = uuid.toString()
+        return randomUUID
+    }
+
     override fun showPhysicalFinishTask(responsePhysical: cbox.yunkang.com.c_box.mvp.datamodel.ResponsePhysical) {
-        if(responsePhysical.code == 200) startActivity(activity?.applicationContext!!, TodayRankingActivity::class.java,null)
+        if(responsePhysical.code == 200) dialog.dismiss()
+        startActivity(activity?.applicationContext!!, TodayRankingActivity::class.java,null)
+        activity!!.finish()
     }
 
     override fun showFailed(throwable: Throwable) {
+        L.i("look over throwable message = " + throwable.message)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        checkNotNull(timer)
-        timer.cancel()
+        if(isTimerinitialize()){
+            if(timer != null){
+                timer.cancel()
+            }
+        }
         handler?.removeCallbacks(refreshRunnable)
         videoPlay?.suspend()
         videoPlay?.setOnErrorListener(null)
@@ -334,16 +400,19 @@ class PhysicalFragment : Fragment() , PhysicalContract.View{
         val custom_cannel = v.findViewById(R.id.custom_cannel) as TextView
         val custom_yes = v.findViewById(R.id.custom_yes) as TextView
         dialog = builder.create()
-//        dialog.getWindow()!!.clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
         dialog.show()
+        var windowManager = dialog.window.attributes
+        windowManager.width = 400
+        windowManager.height = ActionBar.LayoutParams.WRAP_CONTENT
+        dialog.window.attributes = windowManager
         dialog.getWindow()!!.setContentView(v)
         dialog.getWindow()!!.setGravity(Gravity.CENTER)
         custom_cannel.setOnClickListener {
-
+            dialog.dismiss()
         }
 
         custom_yes.setOnClickListener {
-
+            sumitPhysicalData()
         }
     }
 }

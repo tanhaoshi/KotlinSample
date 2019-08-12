@@ -1,6 +1,11 @@
 package cbox.yunkang.com.c_box.mvp.model
 
+import cbox.yunkang.com.c_box.eventbus.MessageEventbus
+import cbox.yunkang.com.c_box.eventbus.User
+import cbox.yunkang.com.c_box.eventbus.UserCommand
 import cbox.yunkang.com.c_box.util.Constant
+import cbox.yunkang.com.c_box.util.L
+import com.alibaba.fastjson.JSON
 import com.ykcx.bcore.bean.*
 import com.ykcx.bcore.cil.UiRendering
 import com.ykcx.bcore.cil.UserProfile
@@ -18,11 +23,13 @@ class YunkangBoxManager : UiRendering{
         return true
     }
 
+    //切换器械
     override fun showUserSwitchEp(p0: UserProfile?): Boolean {
+        postCommand(UserCommand.USERSWITCHEP,p0!!)
         return true
     }
 
-    var list = LinkedList<cbox.yunkang.com.c_box.eventbus.User>()
+    var list = LinkedList<User>()
 
     companion object {
 
@@ -48,12 +55,15 @@ class YunkangBoxManager : UiRendering{
         return true
     }
 
+    //用户下线
     override fun showUserOffline(p0: UserProfile?): Boolean {
+        postCommand(UserCommand.USEROFFLINE,p0!!)
         return true
     }
 
+    //用户全部下线
     override fun showUserAllOffline(p0: String?): Boolean {
-        postCommand(cbox.yunkang.com.c_box.eventbus.UserCommand.USEROFFINE,null!!)
+        postCommand(UserCommand.USERAllOFFINE,null!!)
         return true
     }
 
@@ -74,8 +84,7 @@ class YunkangBoxManager : UiRendering{
     }
 
     override fun showUserIcon(p0: UserProfile?): Boolean {
-        if(p0 == null) return true
-        postCommand(cbox.yunkang.com.c_box.eventbus.UserCommand.USERSHOWICON,p0!!)
+        postCommand(UserCommand.USERSHOWICON,p0!!)
         return true
     }
 
@@ -112,12 +121,14 @@ class YunkangBoxManager : UiRendering{
         return true
     }
 
+    // 数据一直在刷新
     override fun showUserRefresh(p0: UserProfile?): Boolean {
+        postCommand(UserCommand.USERREFRESH,p0!!)
         return true
     }
 
     override fun showTeamCourseBuyRecord(p0: TeamWorkRecord?) {
-        var messageEventbus = cbox.yunkang.com.c_box.eventbus.MessageEventbus(Constant.BOX_WECHAT_PAY,p0)
+        var messageEventbus = MessageEventbus.obtain(Constant.BOX_WECHAT_PAY,p0)
         EventBus.getDefault().post(messageEventbus)
     }
 
@@ -150,17 +161,21 @@ class YunkangBoxManager : UiRendering{
     }
 
     fun postCommand(command: Int, userProfile: UserProfile) {
-        val user: cbox.yunkang.com.c_box.eventbus.User = cbox.yunkang.com.c_box.eventbus.User.obtain(userProfile)
+        var user : User? = null
+        if(userProfile != null){
+            user = User.obtain(userProfile)
+        }
         when (command) {
-            cbox.yunkang.com.c_box.eventbus.UserCommand.USERONLINE -> onLinePush(user)
-            cbox.yunkang.com.c_box.eventbus.UserCommand.USEROFFINE -> user.recycle()
-            cbox.yunkang.com.c_box.eventbus.UserCommand.USERSWITCHEP -> {}
-            cbox.yunkang.com.c_box.eventbus.UserCommand.USERREFRESH,
-            cbox.yunkang.com.c_box.eventbus.UserCommand.USERSWITCHAC,
-            cbox.yunkang.com.c_box.eventbus.UserCommand.USERCHANGEWEIGHT,
-            cbox.yunkang.com.c_box.eventbus.UserCommand.USEREFRESHHEART,
-            cbox.yunkang.com.c_box.eventbus.UserCommand.USERSHOWICON -> reflashPush(user)
-            cbox.yunkang.com.c_box.eventbus.UserCommand.USERRESTING -> {}
+            UserCommand.USERONLINE -> onLinePush(user)
+            UserCommand.USEROFFLINE -> userOffline(user)
+            UserCommand.USERAllOFFINE -> allUserOffline()
+            UserCommand.USERSWITCHEP -> switchEpAction(user)
+            UserCommand.USERREFRESH -> refreshData(user)
+            UserCommand.USERSWITCHAC,
+            UserCommand.USERCHANGEWEIGHT,
+            UserCommand.USEREFRESHHEART,
+            UserCommand.USERSHOWICON -> reflashPush(user)
+            UserCommand.USERRESTING -> {}
         }
     }
 
@@ -168,7 +183,7 @@ class YunkangBoxManager : UiRendering{
      * 用户上线
      * @param user
      */
-    private fun onLinePush(user: cbox.yunkang.com.c_box.eventbus.User?): Boolean {
+    private fun onLinePush(user: User?): Boolean {
         if (user == null || list == null) {
             return false
         }
@@ -181,21 +196,104 @@ class YunkangBoxManager : UiRendering{
             val userCache = list[index]
             list[index] = userCache
         }
-        var messageEventbus = cbox.yunkang.com.c_box.eventbus.MessageEventbus(Constant.BOX_USER_ONLINE,list)
+        var messageEventbus = MessageEventbus.obtain(Constant.BOX_USER_ONLINE,list)
         EventBus.getDefault().post(messageEventbus)
         return true
     }
 
-    private fun reflashPush(user: cbox.yunkang.com.c_box.eventbus.User?): Boolean {
+    /**
+     * 用户下线
+     */
+    private fun userOffline(user: User?):Boolean{
+        if (user == null || list == null) {
+            return false
+        }
+        val index = list.indexOf(user)
+        if (index != -1) {
+            list.remove(user)
+        }
+        var messageEventbus = MessageEventbus.obtain(Constant.BOX_USER_OFFLINE,list)
+        EventBus.getDefault().post(messageEventbus)
+        return true
+    }
+
+    private fun reflashPush(user: User?): Boolean {
         if (user == null || list == null) {
             return false
         }
         val index = list.indexOf(user)
         if (index != -1) {
             list[index] = user
+        }else{
+            list.add(user)
         }
-        var messageEventbus = cbox.yunkang.com.c_box.eventbus.MessageEventbus(Constant.BOX_USER_ICON,list)
+        var messageEventbus = MessageEventbus.obtain(Constant.BOX_USER_ICON,list)
         EventBus.getDefault().post(messageEventbus)
+        return false
+    }
+
+    var maxFrequency : Float = 0F
+    var maxRate      = 0
+
+    private fun refreshData(user:User?) :Boolean{
+        if (user == null || list == null) {
+            return false
+        }
+        val index = list.indexOf(user)
+        if (index != -1) {
+            if(user.tapinValue.toFloat() > list[index].tapinValue.toFloat()){
+                maxFrequency = user.tapinValue.toFloat()
+            }else{
+                maxFrequency = list[index].tapinValue.toFloat()
+            }
+
+            if(user.heartRateValue > list[index].heartRateValue){
+                maxRate = user.heartRateValue
+            }else{
+                maxRate = list[index].heartRateValue
+            }
+
+            list[index] = user
+        }
+        var messageEventbus = MessageEventbus.obtain(Constant.BOX_USER_REFRESH,list)
+        EventBus.getDefault().post(messageEventbus)
+        return false
+    }
+
+    /**
+     * 用户全部下线
+     */
+    private fun allUserOffline(){
+        if (list == null) {
+            return
+        }
+
+        list.clear()
+        var messageEventbus = MessageEventbus.obtain(Constant.BOX_USER_ALLOFFLINE,list)
+        EventBus.getDefault().post(messageEventbus)
+    }
+
+    /**
+     * 切换器械
+     */
+    private fun switchEpAction(user: User?) : Boolean {
+
+        if (user == null || list == null) {
+            return false
+        }
+        val index = list.indexOf(user)
+
+        if (index != -1) {
+            if(list[index].bindEpType != user.bindEpType){
+
+                list.remove(user)
+            }else{
+
+                list[index] = user
+            }
+            var messageEventbus = MessageEventbus.obtain(Constant.BOX_USER_SWITCHEP,list)
+            EventBus.getDefault().post(messageEventbus)
+        }
         return false
     }
 }

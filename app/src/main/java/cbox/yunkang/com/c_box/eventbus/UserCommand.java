@@ -8,9 +8,14 @@ public class UserCommand {
     public static final int USERONLINE = 1;
 
     /**
-     * 用户下线（用户下屏）
+     * 全部用户下线（用户下屏）
      */
-    public static final int USEROFFINE = 2;
+    public static final int USERAllOFFINE = 2;
+
+    /**
+     * 单个用户下线
+     */
+    public static final int USEROFFLINE = 0;
 
     /**
      * 用户切换器械

@@ -25,5 +25,13 @@ class Constant {
         const val BOX_USER_ONLINE = "box_user_online"
 
         const val BOX_USER_ICON = "box_user_icon"
+
+        const val BOX_USER_REFRESH = "box_user_refresh"
+
+        const val BOX_USER_ALLOFFLINE = "box_user_alloffline"
+
+        const val BOX_USER_OFFLINE = "box_user_offline"
+
+        const val BOX_USER_SWITCHEP = "box_user_switch"
     }
 }

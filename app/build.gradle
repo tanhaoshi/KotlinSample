@@ -86,7 +86,7 @@ dependencies {
     androidTestImplementation "com.android.support.test:runner:$runnerVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
     implementation files('libs/netty-all-4.1.30.Final.jar')
-    implementation files('libs/mtboxcore_v1.0.jar')
+    implementation files('libs/mtboxcore_v1.1.jar')
 }
 repositories {
     maven { url 'https://www.jitpack.io' }

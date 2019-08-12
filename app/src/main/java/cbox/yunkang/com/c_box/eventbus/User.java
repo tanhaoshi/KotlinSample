@@ -6,33 +6,15 @@ import android.text.TextUtils;
 
 import com.ykcx.bcore.cil.UserProfile;
 
+import cbox.yunkang.com.c_box.util.L;
+
 public class User implements Comparable<User>{
 
     private static final Pools.SimplePool<User> sPool = new Pools.SimplePool<>(10);
 
     public  static User obtain(UserProfile userProfile){
         User instance = sPool.acquire();
-        return (instance != null) ? instance : builderUser(userProfile);
-    }
-
-    private static User builderUser(UserProfile userProfile){
-        User user = new UserBuilder()
-                .bindEpName(userProfile.getBindEpName())
-                .format(userProfile.getFormat())
-                .usrOpenId(userProfile.getUsrOpenId())
-                .usrBandId(userProfile.getUsrBandId())
-                .usrIconUrl(userProfile.getUsrIconUrl())
-                .sportValue(userProfile.getSportValue())
-                .sportTotalValue(userProfile.getSportTotalValue())
-                .usrName(userProfile.getUsrName())
-                .bindEpType(userProfile.getBindEpType())
-                .curActionName(userProfile.getCurActionName())
-                .heartRateValue(userProfile.getHeartRateValue())
-                .kcal(userProfile.getKcal())
-                .trainStrength(userProfile.getTrainStrength())
-                .epWeight(userProfile.getEpWeight())
-                .build();
-        return user;
+        return (instance != null) ? instance : new User(userProfile);
     }
 
     public void recycle(){
@@ -138,21 +120,22 @@ public class User implements Comparable<User>{
 
     private int commandType = -1;
 
-    private User(UserBuilder userBuilder){
-        this.format = userBuilder.format;
-        this.bindEpName = userBuilder.bindEpName;
-        this.usrOpenId = userBuilder.usrOpenId;
-        this.usrBandId = userBuilder.usrBandId;
-        this.usrIconUrl = userBuilder.usrIconUrl;
-        this.sportValue = userBuilder.sportValue;
-        this.sportTotalValue = userBuilder.sportTotalValue;
-        this.usrName = userBuilder.usrName;
-        this.bindEpType = userBuilder.bindEpType;
-        this.curActionName = userBuilder.curActionName;
-        this.heartRateValue = userBuilder.heartRateValue;
-        this.kcal = userBuilder.kcal;
-        this.trainStrength = userBuilder.trainStrength;
-        this.EpWeight = userBuilder.EpWeight;
+    private User(UserProfile userProfile){
+        this.format = userProfile.getFormat();
+        this.bindEpName = userProfile.getBindEpName();
+        this.usrOpenId = userProfile.getUsrOpenId();
+        this.usrBandId = userProfile.getUsrBandId();
+        this.usrIconUrl = userProfile.getUsrIconUrl();
+        this.sportValue = userProfile.getSportValue();
+        this.sportTotalValue = userProfile.getSportTotalValue();
+        this.usrName = userProfile.getUsrName();
+        this.bindEpType = userProfile.getBindEpType();
+        this.curActionName = userProfile.getCurActionName();
+        this.heartRateValue = userProfile.getHeartRateValue();
+        this.kcal = userProfile.getKcal();
+        this.trainStrength = userProfile.getTrainStrength();
+        this.EpWeight = userProfile.getEpWeight();
+        this.tapinValue = userProfile.getmTapinValue();
     }
 
     public String getTrainStrength() {
@@ -317,133 +300,6 @@ public class User implements Comparable<User>{
 
     public void setEquipPartType(String equipPartType) {
         this.equipPartType = equipPartType;
-    }
-
-    public static class UserBuilder{
-        private String usrBandId;
-        private String usrOpenId;
-        private String sportValue;
-        private float EpWeight;
-        private String usrName;
-        private String usrIconUrl;
-        private String bindEpName;
-        private int bindEpType;
-        private String sportTotalValue;
-        private String curActionName;
-        private int format;
-        private String speedValue;
-        private long onLineTime ;
-        private long restartTime;
-        private double kcal;
-        private int heartRateValue;
-        private String msg;
-        private String trainStrength;
-        private int commandType = -1;
-        private String tapinValue;
-        private String equipPartType;
-
-        public UserBuilder(){
-
-        }
-
-        public UserBuilder usrBandId(String usrBandId){
-            this.usrBandId = usrBandId;
-            return this;
-        }
-
-        public UserBuilder usrOpenId(String usrOpenId){
-            this.usrOpenId = usrOpenId;
-            return this;
-        }
-
-        public UserBuilder sportValue(String sportValue){
-            this.sportValue = sportValue;
-            return this;
-        }
-
-        public UserBuilder epWeight(float EpWeight){
-            this.EpWeight = EpWeight;
-            return this;
-        }
-
-        public UserBuilder usrName(String usrName){
-            this.usrName = usrName;
-            return this;
-        }
-
-        public UserBuilder usrIconUrl(String usrIconUrl){
-            this.usrIconUrl = usrIconUrl;
-            return this;
-        }
-
-        public UserBuilder bindEpName(String bindEpName){
-            this.bindEpName = bindEpName;
-            return this;
-        }
-
-        public UserBuilder bindEpType(int bindEpType){
-            this.bindEpType = bindEpType;
-            return this;
-        }
-
-        public UserBuilder sportTotalValue(String sportTotalValue){
-            this.sportTotalValue = sportTotalValue;
-            return this;
-        }
-
-        public UserBuilder curActionName(String curActionName){
-            this.curActionName = curActionName;
-            return this;
-        }
-
-        public UserBuilder format(int format){
-            this.format = format;
-            return this;
-        }
-
-        public UserBuilder onLineTime(long onLineTime){
-            this.onLineTime = onLineTime;
-            return this;
-        }
-
-        public UserBuilder restartTime(long restartTime){
-            this.restartTime = restartTime;
-            return this;
-        }
-
-        public UserBuilder kcal(double kcal){
-            this.kcal = kcal;
-            return this;
-        }
-
-        public UserBuilder heartRateValue(int heartRateValue){
-            this.heartRateValue = heartRateValue;
-            return this;
-        }
-
-        public UserBuilder msg(String msg){
-            this.msg = msg;
-            return this;
-        }
-
-        public UserBuilder trainStrength(String trainStrength){
-            this.trainStrength = trainStrength;
-            return this;
-        }
-
-        public UserBuilder tapinValue(String tapinValue){
-            this.tapinValue = tapinValue;
-            return this;
-        }
-
-        public UserBuilder equipPartType(String equipPartType){
-            this.equipPartType = equipPartType;
-            return this;
-        }
-
-        public User build(){
-            return new User(this);
-        }
     }
 
     @Override

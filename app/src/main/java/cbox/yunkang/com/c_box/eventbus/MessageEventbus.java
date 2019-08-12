@@ -1,6 +1,16 @@
 package cbox.yunkang.com.c_box.eventbus;
 
+import android.support.v4.util.Pools;
+
+
 public class MessageEventbus {
+
+    private static final Pools.SimplePool<MessageEventbus> sPool = new Pools.SimplePool<>(10);
+
+    public  static MessageEventbus obtain(String type,Object o){
+        MessageEventbus instance = sPool.acquire();
+        return (instance != null) ? instance : new MessageEventbus(type,o);
+    }
 
     private String type;
     private Object mObject;

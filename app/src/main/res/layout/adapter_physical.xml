@@ -17,8 +17,8 @@
         android:layout_below="@+id/roundRect"
         android:layout_centerHorizontal="true"
         android:src="@drawable/a1"
-        android:layout_width="25dp"
-        android:layout_height="20dp"/>
+        android:layout_width="40dp"
+        android:layout_height="32dp"/>
 
     <TextView
         android:id="@+id/text"
@@ -26,9 +26,10 @@
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="6sp"
+        android:textSize="12sp"
         android:text="10.1"
+        android:layout_marginTop="4dp"
         android:layout_width="wrap_content"
-        android:layout_height="10dp"/>
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

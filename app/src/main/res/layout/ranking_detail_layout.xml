@@ -118,7 +118,7 @@
         app:layout_constraintLeft_toRightOf="@+id/target_heartRate"
         android:background="@color/ranking_heart_rate"
         android:layout_marginLeft="8dp"
-        android:layout_width="112dp"
+        android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:textAlignment="center"
         android:text="脂肪燃烧：70%-80%"

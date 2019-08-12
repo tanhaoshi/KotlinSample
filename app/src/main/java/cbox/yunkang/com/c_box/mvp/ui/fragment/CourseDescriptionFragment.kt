@@ -7,8 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import cbox.yunkang.com.c_box.R
+import cbox.yunkang.com.c_box.eventbus.User
 import cbox.yunkang.com.c_box.mvp.contract.CourseDescriptionContract
-import cbox.yunkang.com.c_box.mvp.datamodel.CourseExplain
+import cbox.yunkang.com.c_box.mvp.datamodel.*
 import cbox.yunkang.com.c_box.mvp.ui.activity.CourseDescriptionActivity
 import cbox.yunkang.com.c_box.mvp.ui.activity.PhysicalActivity
 import cbox.yunkang.com.c_box.util.Constant
@@ -42,7 +43,7 @@ class CourseDescriptionFragment :Fragment(), CourseDescriptionContract.View{
         override fun run() {
             schedules.text = tempTime.toString()
 
-            if(tempTime > 118){
+            if(tempTime > 100){
                 handler?.postDelayed(this,1000)
             }else{
                 var bundle = Bundle()
@@ -82,8 +83,8 @@ class CourseDescriptionFragment :Fragment(), CourseDescriptionContract.View{
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(messageEventbus: cbox.yunkang.com.c_box.eventbus.MessageEventbus) {
         when(messageEventbus.type){
-            Constant.BOX_USER_ONLINE -> postInitializeView(messageEventbus.`object` as List<cbox.yunkang.com.c_box.eventbus.User>)
-            Constant.BOX_USER_ICON   -> postInitializeView(messageEventbus.`object` as List<cbox.yunkang.com.c_box.eventbus.User>)
+            Constant.BOX_USER_ONLINE -> postInitializeView(messageEventbus.`object` as List<User>)
+            Constant.BOX_USER_ICON   -> postInitializeView(messageEventbus.`object` as List<User>)
         }
     }
 
@@ -118,12 +119,13 @@ class CourseDescriptionFragment :Fragment(), CourseDescriptionContract.View{
         presenter.getCourseDescriptionPresenter(requestMap)
     }
 
-    override fun showCourseDescriptionTask(courseExplain: cbox.yunkang.com.c_box.mvp.datamodel.CourseExplain) {
+    override fun showCourseDescriptionTask(courseExplain: CourseExplain) {
         postInitializeLayoutView(courseExplain)
         fillTable(courseExplain.data.classLeague.stageGroup)
     }
 
     private inline fun postInitializeLayoutView(courseExplain:CourseExplain){
+        course_title.text = courseExplain.data.classLeague.title
         star.starMark = courseExplain.data.classLeague.level.toFloat()
         duration.text = courseExplain.data.classLeague.duration.toString()
         fat.text      = courseExplain.data.classLeague.consume
@@ -135,50 +137,51 @@ class CourseDescriptionFragment :Fragment(), CourseDescriptionContract.View{
 
     }
 
-    private fun fillTable(hashMap: HashMap<String,List<cbox.yunkang.com.c_box.mvp.datamodel.TableModel>>){
-        var introduces = ArrayList<cbox.yunkang.com.c_box.mvp.datamodel.CourseIntroduce>()
+    private fun fillTable(hashMap: HashMap<String,List<TableModel>>){
+        var introduces = ArrayList<CourseIntroduce>()
 
         var seriaiName : Int = -1
 
-        for(tableList:List<cbox.yunkang.com.c_box.mvp.datamodel.TableModel> in hashMap.values){
+        for(tableList:List<TableModel> in hashMap.values){
 
             seriaiName ++
 
-            var contents = ArrayList<cbox.yunkang.com.c_box.mvp.datamodel.StageContent>()
+            var contents = ArrayList<StageContent>()
 
             for(value in tableList){
 
-                var actions = ArrayList<cbox.yunkang.com.c_box.mvp.datamodel.StageAction>()
+                var actions = ArrayList<StageAction>()
 
                 var action = cbox.yunkang.com.c_box.mvp.datamodel.StageAction(value.essential)
 
                 actions.add(action)
 
-                var beats = ArrayList<cbox.yunkang.com.c_box.mvp.datamodel.StageBeat>()
+                var beats = ArrayList<StageBeat>()
 
-                var beat = cbox.yunkang.com.c_box.mvp.datamodel.StageBeat(value.heartRange.toString(),actions)
+                var beat = StageBeat(value.heartRange.toString(),actions)
 
                 beats.add(beat)
 
-                var durantions = ArrayList<cbox.yunkang.com.c_box.mvp.datamodel.StageDuration>()
+                var durantions = ArrayList<StageDuration>()
 
-                var durantion = cbox.yunkang.com.c_box.mvp.datamodel.StageDuration(value.duration,beats)
+                var durantion = StageDuration(value.duration,beats)
 
                 durantions.add(durantion)
 
-                var stageContent = cbox.yunkang.com.c_box.mvp.datamodel.StageContent(value.title,durantions)
+                var stageContent = StageContent(value.title,durantions)
 
                 contents.add(stageContent)
 
             }
 
-            var stages = ArrayList<cbox.yunkang.com.c_box.mvp.datamodel.CourseStage>()
+            var stages = ArrayList<CourseStage>()
 
-            var courseStage = cbox.yunkang.com.c_box.mvp.datamodel.CourseStage(tableList.get(0).stage,contents)
+            var courseStage = CourseStage(tableList.get(0).stage,contents)
 
             stages.add(courseStage)
 
-            var courseIntroduce = cbox.yunkang.com.c_box.mvp.datamodel.CourseIntroduce(seriaiName.toString(),stages)
+            var courseIntroduce = CourseIntroduce(seriaiName.toString(),stages)
+
             introduces.add(courseIntroduce)
         }
 
@@ -187,7 +190,7 @@ class CourseDescriptionFragment :Fragment(), CourseDescriptionContract.View{
         var stage   = ArrayColumn<String>("课程阶段","mStages.stageName")
         var content = ArrayColumn<String>("内容","mStages.mContents.contentName")
 
-        var tableData = TableData<cbox.yunkang.com.c_box.mvp.datamodel.CourseIntroduce>("课程安排",introduces,stage,content)
+        var tableData = TableData<CourseIntroduce>("课程安排",introduces,stage,content)
 
         smartTable.config.isShowTableTitle = false
 
@@ -202,6 +205,7 @@ class CourseDescriptionFragment :Fragment(), CourseDescriptionContract.View{
         var fontStyle = FontStyle(20,resources.getColor(R.color.white))
 
         var lineStyle = LineStyle()
+
         lineStyle.color = resources.getColor(R.color.ranking_detail_bg)
 
         smartTable.config.contentGridStyle = lineStyle

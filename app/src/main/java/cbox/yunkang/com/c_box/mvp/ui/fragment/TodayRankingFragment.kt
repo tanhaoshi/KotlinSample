@@ -12,6 +12,7 @@ import cbox.yunkang.com.c_box.mvp.contract.CourseTodayRankingContract
 import cbox.yunkang.com.c_box.mvp.ui.adapter.TodayRankingAdapter
 import cbox.yunkang.com.c_box.util.L
 import com.alibaba.fastjson.JSON
+import com.ykcx.bcore.utils.BasePreference
 import okhttp3.RequestBody
 
 
@@ -64,7 +65,7 @@ class TodayRankingFragment : Fragment(), CourseTodayRankingContract.View{
     override fun onStart() {
         super.onStart()
         var hashMap = HashMap<String,String>()
-        hashMap["boxNum"] = "2000001"
+        hashMap["boxNum"] = BasePreference.getInstance().boxNo
         var content = JSON.toJSONString(hashMap)
         val body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), content)
         presenter.getCourseTodayRankingPresenter(body)

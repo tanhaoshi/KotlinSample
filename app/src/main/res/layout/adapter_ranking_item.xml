@@ -21,7 +21,7 @@
         app:layout_constraintLeft_toRightOf="@+id/rankingSort"
         app:layout_constraintTop_toTopOf="parent"
         android:text="@string/ranking_photo"
-        android:layout_marginLeft="55dp"
+        android:layout_marginLeft="146dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>
 
@@ -31,7 +31,7 @@
         app:layout_constraintLeft_toRightOf="@+id/rankingPhoto"
         app:layout_constraintTop_toTopOf="parent"
         android:text="@string/ranking_member"
-        android:layout_marginLeft="68dp"
+        android:layout_marginLeft="146dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>
 
@@ -40,7 +40,7 @@
         style="@style/ranking_item"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/rankingMember"
-        android:layout_marginLeft="68dp"
+        android:layout_marginLeft="146dp"
         android:text="@string/ranking_KCAL"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>
@@ -50,7 +50,7 @@
         style="@style/ranking_item"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/rankingKCAL"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="146dp"
         android:text="@string/ranking_average_beat"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>
@@ -60,7 +60,7 @@
         style="@style/ranking_item"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/rankingAverageBeat"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="146dp"
         android:text="@string/ranking_average_lap"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>

@@ -2,6 +2,7 @@ package cbox.yunkang.com.c_box.mvp.datamodel;
 
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class CourseExplain {
@@ -121,7 +122,7 @@ public class CourseExplain {
             private Object actionList;
             private Object actionSpinList;
             private Object priceInfoList;
-            private HashMap<String,List<TableModel>> stageGroup;
+            private LinkedHashMap<String,List<TableModel>> stageGroup;
 
             public int getId() {
                 return id;
@@ -363,11 +364,11 @@ public class CourseExplain {
                 this.priceInfoList = priceInfoList;
             }
 
-            public HashMap<String, List<TableModel>> getStageGroup() {
+            public LinkedHashMap<String, List<TableModel>> getStageGroup() {
                 return stageGroup;
             }
 
-            public void setStageGroup(HashMap<String, List<TableModel>> stageGroup) {
+            public void setStageGroup(LinkedHashMap<String, List<TableModel>> stageGroup) {
                 this.stageGroup = stageGroup;
             }
         }

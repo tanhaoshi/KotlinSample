@@ -68,8 +68,6 @@ class SmartCourseAdapter : RecyclerView.Adapter<SmartCourseAdapter.SmartCourseVi
         viewHolder.use_count.text = "使用次数: "+list?.get(position)?.useCount
         viewHolder.duration.text = "课时: "+list?.get(position)?.duration
 
-        L.i("look over flag value = " + flag)
-
         if(flag == 2){
 
             viewHolder.coursePrice_rl.visibility = View.GONE
@@ -162,7 +160,7 @@ class SmartCourseAdapter : RecyclerView.Adapter<SmartCourseAdapter.SmartCourseVi
     }
 
     private fun showCourseStatus(position: Int,viewHolder: SmartCourseViewHolder){
-        var path = basePath + list?.get(position)?.uuid.toString()
+        var path = basePath + list?.get(position)?.uuid.toString() +File.separator + list?.get(position)?.video?.substringAfterLast("/")
         var file = File(path)
         if(!file.exists()){
             viewHolder.downloader_explain.text = "点击下载"
@@ -206,6 +204,9 @@ class SmartCourseAdapter : RecyclerView.Adapter<SmartCourseAdapter.SmartCourseVi
         }
     }
 
+
+    var percent : Int = 0
+
     private fun startUploader(position: Int,smartCourseViewHolder: SmartCourseViewHolder){
         var downloadIdOne = 0
 
@@ -243,8 +244,14 @@ class SmartCourseAdapter : RecyclerView.Adapter<SmartCourseAdapter.SmartCourseVi
                 })
                 .setOnProgressListener(object : OnProgressListener {
                     override fun onProgress(progress: Progress?) {
-                        var percent : Long = progress?.currentBytes!! * 100 / progress.totalBytes
-                        smartCourseViewHolder.downloader_progress.progress = percent.toInt()
+                        var percentLong : Long = progress?.currentBytes!! * 100 / progress.totalBytes
+
+                        if(percentLong.toInt() > percent){
+                            smartCourseViewHolder.downloader_progress.progress = percent
+                        }
+
+                        percent = percentLong.toInt()
+
                         if(percent.toInt() == 100){
                             smartCourseViewHolder.downloader_explain.setTextColor(context?.resources?.getColor(R.color.course_price_bg)!!)
                             smartCourseViewHolder.downloader_explain.text = "下载完成"

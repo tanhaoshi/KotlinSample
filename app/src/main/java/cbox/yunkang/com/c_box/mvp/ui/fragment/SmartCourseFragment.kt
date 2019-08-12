@@ -58,9 +58,11 @@ class SmartCourseFragment : Fragment() , SmartCourseContract.View,View.OnClickLi
         return root
     }
 
+    var flag = "1"
+
     override fun onStart() {
         super.onStart()
-        startTransformValue("2","1")
+        startTransformValue("2",flag)
     }
 
     private fun checkFile(){
@@ -103,6 +105,8 @@ class SmartCourseFragment : Fragment() , SmartCourseContract.View,View.OnClickLi
 
             smartCourseAdapter.flag = 1
 
+            flag = "1"
+
             startTransformValue("2","1")
         }
     }
@@ -118,6 +122,8 @@ class SmartCourseFragment : Fragment() , SmartCourseContract.View,View.OnClickLi
             isSwitch = false
 
             smartCourseAdapter.flag = 2
+
+            flag = "2"
 
             startTransformValue("2","2")
         }
@@ -147,7 +153,6 @@ class SmartCourseFragment : Fragment() , SmartCourseContract.View,View.OnClickLi
 
     override fun showTryResult(result: String) {
         result.toast(activity?.applicationContext!!)
-        L.i("look over list size = " + list.size)
         list.removeAt(tempPosition)
         smartCourseAdapter.list = list
     }
